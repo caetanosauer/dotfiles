@@ -1,0 +1,50 @@
+import XMonad
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.ManageHelpers
+import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Util.Run(spawnPipe)
+import qualified Data.Map as M
+import System.IO
+
+main = -- do
+--  xmproc <- spawnPipe "xmobar -x 0" -- start xmobar
+  xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig
+    { manageHook =  myManageHook
+    , layoutHook = myLayoutHook
+    , logHook = myLogHook xmproc
+    , workspaces = myWorkspaces
+    , keys = myKeys
+    , modMask = mod4Mask -- Rebind Mod to Windows key
+    , focusedBorderColor = "#CC0000"
+    , normalBorderColor = "#666666"
+    , borderWidth = 1
+    , focusFollowsMouse = True
+    , terminal = "urxvt"
+    }
+
+-- <+> is infix operator that combines 2 ManageHooks into one
+myManageHook = manageDocks <+> manageHook defaultConfig
+
+myLayoutHook = avoidStruts $ layoutHook defaultConfig
+
+myLogHook h = dynamicLogWithPP $ customPP { ppOutput = hPutStrLn h }
+
+-- Key combinations
+myKeys conf = M.union (keys defaultConfig conf) $ M.fromList $
+  [ ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock"),
+    ((mod4Mask .|. shiftMask, xK_q), spawn "xfce4-session-logout")
+  ]
+
+-- PP
+customPP = defaultPP
+  { ppHidden = xmobarColor "#00FF00" ""
+	, ppCurrent = xmobarColor "#FAC033" "" . wrap "[" "]"
+	, ppUrgent = xmobarColor "#FAC033" "" . wrap "*" "*"
+  , ppLayout = xmobarColor "#FAC033" ""
+  , ppTitle = xmobarColor "#DEDEDE" "" . shorten 80
+  , ppSep = "<fc=#0033FF> | </fc>"
+  }
+
+myWorkspaces = map show [1..9]
