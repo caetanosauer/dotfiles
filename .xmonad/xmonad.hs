@@ -36,12 +36,14 @@ myManageHook = composeAll . concat $
     [ className=? w --> doFloat | w <- floats ],
     [ className=? w --> doShift "3" | w <- webs ],
     [ className=? w --> doShift "4" | w <- pdfs ],
-    [ className=? w --> doShift "5" | w <- files ]
+    [ className=? w --> doShift "5" | w <- files ],
+    [ className=? c --> doIgnore | c <- ignore ]
   ]
   where floats = ["Gimp"]
         webs = ["Firefox", "Chrome", "Google-chrome"]
         pdfs = ["Adobe Reader", "Document Reader", "Okular"]
         files = ["Nautilus", "Thunar"]
+        ignore = ["trayer"]
 
 myLayoutHook = avoidStruts $ layoutHook defaultConfig
 

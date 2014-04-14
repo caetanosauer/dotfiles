@@ -1,7 +1,7 @@
-Config { font = "xft:dejavu sans monosize=11:antialias=true"
+Config { font = "xft:Bitstream Vera Sans Mono:size=12:antialias=true"
        , bgColor = "#000000"
        , fgColor = "#babdb9"
-       , position = Top
+       , position = TopW L 95
        , commands = [ Run Network "wlan0"
                                   ["-L", "0",
                                    "-H", "32",
