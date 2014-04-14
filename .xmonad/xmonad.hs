@@ -4,14 +4,16 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.EwmhDesktops   -- fullscreenEventHook fixes chrome fullscreen
+import XMonad.Util.NamedWindows
 import XMonad.Util.EZConfig(additionalKeys)
-import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.Run
 import qualified Data.Map as M
+import qualified XMonad.StackSet as W
 import System.IO
 
 main =  do
   xmproc <- spawnPipe "xmobar -x 0" -- start xmobar
-  xmonad $ withUrgencyHook NoUrgencyHook $ ewmh defaultConfig
+  xmonad $ withUrgencyHook LibNotifyUrgencyHook $ ewmh defaultConfig
     { manageHook =  myManageHook <+> manageHook defaultConfig
     , layoutHook = myLayoutHook
     , logHook = myLogHook xmproc
@@ -57,14 +59,27 @@ myKeys conf = M.union (keys defaultConfig conf) $ M.fromList $
   , ((0, 0x1008FF12), spawn "amixer set Master playback 0")
   ]
 
--- PP
+-- PrettyPrint (xmobar input with workspaces and window title)
+-- http://xmonad.org/xmonad-docs/xmonad-contrib/XMonad-Hooks-DynamicLog.html#v:defaultPP
 customPP = defaultPP
   { ppHidden = xmobarColor "#eeeeec" ""
-	, ppCurrent = xmobarColor "#729fcf" "" . wrap "[" "]"
-	, ppUrgent = xmobarColor "#729fcf" "" . wrap "*" "*"
+  , ppCurrent = xmobarColor "#729fcf" "" . wrap "[" "]"
+  , ppUrgent = xmobarColor "#fce94f" "" . wrap "*" "*"
   , ppLayout = xmobarColor "#729fcf" ""
   , ppTitle = xmobarColor "#babdb9" "" . shorten 80
   , ppSep = "<fc=#555753> | </fc>"
   }
 
+-- Notify-osd (http://pbrisbin.com/posts/using_notify_osd_for_xmonad_notifications/)
+data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
+
+instance UrgencyHook LibNotifyUrgencyHook where
+    urgencyHook LibNotifyUrgencyHook w = do
+        name     <- getName w
+        Just idx <- fmap (W.findTag w) $ gets windowset
+        safeSpawn "notify-send" [show name, "workspace " ++ idx]
+
+
+
+-- Workspaces
 myWorkspaces = map show [1..9]

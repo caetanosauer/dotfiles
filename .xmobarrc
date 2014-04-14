@@ -1,4 +1,4 @@
-Config { font = "xft:inconsolata:size=11:antialias=true"
+Config { font = "xft:dejavu sans monosize=11:antialias=true"
        , bgColor = "#000000"
        , fgColor = "#babdb9"
        , position = Top

@@ -15,6 +15,10 @@ URxvt*termName: rxvt-unicode
 URxvt.perl-ext-common: default,matcher
 URxvt.urlLauncher: firefox
 URxvt.matcher.button: 1
+
+! set window property 'urgent' when bell is received
+URxvt*urgentOnBell: true
+URxvt*visualBell:   false
  
 urxvt*foreground: white
 urxvt*background: black
