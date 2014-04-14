@@ -59,12 +59,12 @@ myKeys conf = M.union (keys defaultConfig conf) $ M.fromList $
 
 -- PP
 customPP = defaultPP
-  { ppHidden = xmobarColor "#00FF00" ""
-	, ppCurrent = xmobarColor "#FAC033" "" . wrap "[" "]"
-	, ppUrgent = xmobarColor "#FAC033" "" . wrap "*" "*"
-  , ppLayout = xmobarColor "#FAC033" ""
-  , ppTitle = xmobarColor "#DEDEDE" "" . shorten 80
-  , ppSep = "<fc=#0033FF> | </fc>"
+  { ppHidden = xmobarColor "#eeeeec" ""
+	, ppCurrent = xmobarColor "#729fcf" "" . wrap "[" "]"
+	, ppUrgent = xmobarColor "#729fcf" "" . wrap "*" "*"
+  , ppLayout = xmobarColor "#729fcf" ""
+  , ppTitle = xmobarColor "#babdb9" "" . shorten 80
+  , ppSep = "<fc=#555753> | </fc>"
   }
 
 myWorkspaces = map show [1..9]

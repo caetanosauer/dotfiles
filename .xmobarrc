@@ -1,15 +1,35 @@
 Config { font = "xft:inconsolata:size=11:antialias=true"
        , bgColor = "#000000"
-       , fgColor = "#EEEEEC"
+       , fgColor = "#babdb9"
        , position = Top
-       , commands = [ Run Network "wlan0" ["-L","0","-H","32","--normal","green","--high","red"] 10
-                    , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
+       , commands = [ Run Network "wlan0"
+                                  ["-L", "0",
+                                   "-H", "32",
+                                   "--normal", "#729fcf",
+                                   "--high", "#ef2929",
+                                   "-w", "3"]
+                                   10
+                    , Run Cpu 
+                            ["-L", "3",
+                             "-H", "50",
+                             "--normal", "#729fcf",
+                             "--high", "#ef2929"]
+                             10
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
-                    , Run Date "<fc=#93a1a1>%a %b %_d %Y %H:%M</fc>" "date" 10
-                    , Run DiskIO [("/", "IO: <total>"), ("sda3", "<total>")] [] 10
+                    , Run Date "<fc=#eeeeec>%a %b %_d %Y %H:%M</fc>" "date" 10
+                    , Run DiskIO
+                             [("/", "IO: <total>"),
+                              ("sda3", "<total>")]
+                             ["-w", "3"]
+                             10
+                    , Run BatteryP ["BAT0"]
+                                   ["-t", "Bat: <left>%",
+                                    "-L", "10", "--low", "#ef2929",
+                                    "-H", "100", "--high", "#729fcf"]
+                                    10
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{  %cpu%  %memory%  %wlan0%  %diskio%  %date%"
+       , template = "%StdinReader% }{  %cpu% | %memory% | %wlan0% | %diskio% | %battery%   %date%"
        }
