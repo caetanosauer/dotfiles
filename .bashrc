@@ -111,4 +111,4 @@ fi
 
 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 
-export PATH=.:$HOME/bin:/opt/texbin:$HOME/.cabal/bin:$PATH
+export PATH=.:$HOME/bin:$HOME/opt/ghc/bin:$HOME/opt/cabal/bin:/opt/texbin:$HOME/.cabal/bin:$PATH

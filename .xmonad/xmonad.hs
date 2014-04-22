@@ -12,7 +12,7 @@ import qualified XMonad.StackSet as W
 import System.IO
 
 main =  do
-  xmproc <- spawnPipe "xmobar -x 0" -- start xmobar
+  xmproc <- spawnPipe "xmobar -x 1" -- start xmobar
   xmonad $ withUrgencyHook LibNotifyUrgencyHook $ ewmh defaultConfig
     { manageHook =  myManageHook <+> manageHook defaultConfig
     , layoutHook = myLayoutHook
@@ -52,7 +52,8 @@ myLogHook h = dynamicLogWithPP $ customPP { ppOutput = hPutStrLn h }
 -- Key combinations
 myKeys conf = M.union (keys defaultConfig conf) $ M.fromList $
   [ ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock")
-  , ((mod4Mask .|. shiftMask, xK_R), spawn "/home/csauer/bin/xrandr-work")
+  , ((mod4Mask .|. shiftMask, xK_r), spawn "bash /home/csauer/bin/xrandr-work")
+  , ((mod4Mask .|. shiftMask, xK_s), spawn "sudo -n pm-suspend")
   -- XF86AudioLowerVolume
   , ((0, 0x1008FF11), spawn "amixer set Master playback 3-")
   -- XF86AudioRaiseVolume

@@ -2,6 +2,7 @@ Config { font = "xft:Bitstream Vera Sans Mono:size=12:antialias=true"
        , bgColor = "#000000"
        , fgColor = "#babdb9"
        , position = TopW L 95
+       , pickBroadest = True
        , commands = [ Run Network "wlan0"
                                   ["-L", "0",
                                    "-H", "32",
