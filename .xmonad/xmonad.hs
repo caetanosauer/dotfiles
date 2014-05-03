@@ -60,6 +60,10 @@ myKeys conf = M.union (keys defaultConfig conf) $ M.fromList $
   , ((0, 0x1008FF13), spawn "amixer set Master playback 3+")
   -- XF86AudioMute
   , ((0, 0x1008FF12), spawn "amixer set Master playback 0")
+  -- XF86MonBrightnessUp
+  , ((0, 0x1008FF02), spawn "xbacklight +20")
+  -- XF86MonBrightnessUp
+  , ((0, 0x1008FF03), spawn "xbacklight -20")
   ]
 
 -- PrettyPrint (xmobar input with workspaces and window title)

@@ -1,4 +1,4 @@
-Config { font = "xft:Bitstream Vera Sans Mono:size=12:antialias=true"
+Config { font = "xft:Bitstream Vera Sans Mono:size=9:antialias=true"
        , bgColor = "#000000"
        , fgColor = "#babdb9"
        , position = TopW L 95
@@ -16,6 +16,7 @@ Config { font = "xft:Bitstream Vera Sans Mono:size=12:antialias=true"
                              "--normal", "#729fcf",
                              "--high", "#ef2929"]
                              10
+                    , Run CpuFreq ["-t", "<cpu0>"] 10
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
                     , Run Date "<fc=#eeeeec>%a %b %_d %Y %H:%M</fc>" "date" 10
                     , Run DiskIO
@@ -28,9 +29,12 @@ Config { font = "xft:Bitstream Vera Sans Mono:size=12:antialias=true"
                                     "-L", "10", "--low", "#ef2929",
                                     "-H", "100", "--high", "#729fcf"]
                                     10
+                    , Run Volume "default" "Master"
+                                    ["-t", "Vol: <volume>%"]
+                                    10
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{  %cpu% | %memory% | %wlan0% | %diskio% | %battery%   %date%"
+       , template = "%StdinReader% }{  %cpu% %cpufreq% | %memory% | %wlan0% | %diskio% | %battery% | %default:Master%   %date%"
        }
