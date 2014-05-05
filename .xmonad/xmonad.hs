@@ -12,7 +12,7 @@ import qualified XMonad.StackSet as W
 import System.IO
 
 main =  do
-  xmproc <- spawnPipe "xmobar -x 1" -- start xmobar
+  xmproc <- spawnPipe "xmobar -x 0" -- start xmobar
   xmonad $ withUrgencyHook LibNotifyUrgencyHook $ ewmh defaultConfig
     { manageHook =  myManageHook <+> manageHook defaultConfig
     , layoutHook = myLayoutHook
