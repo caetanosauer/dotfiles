@@ -13,11 +13,12 @@ Config { font = "xft:Bitstream Vera Sans Mono:size=9:antialias=true"
                     , Run Cpu 
                             ["-L", "3",
                              "-H", "50",
+                             "-t", "CPU: <total>%",
                              "--normal", "#729fcf",
                              "--high", "#ef2929"]
                              10
                     , Run CpuFreq ["-t", "<cpu0>"] 10
-                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Memory ["-t","MEM: <usedratio>%"] 10
                     , Run Date "<fc=#eeeeec>%a %b %_d %Y %H:%M</fc>" "date" 10
                     , Run DiskIO
                              [("/", "IO: <total>"),
