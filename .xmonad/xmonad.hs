@@ -55,6 +55,7 @@ myKeys conf = M.union (keys defaultConfig conf) $ M.fromList $
   , ((mod4Mask .|. shiftMask, xK_r), spawn "bash /home/csauer/bin/xrandr-work")
   , ((mod4Mask .|. shiftMask, xK_s), spawn "sudo -n pm-suspend")
   , ((mod4Mask .|. shiftMask, xK_h), spawn "sudo -n pm-hibernate")
+  , ((mod4Mask .|. shiftMask, xK_n), spawn "quicknote")
   -- XF86AudioLowerVolume
   , ((0, 0x1008FF11), spawn "amixer set Master playback 3-")
   -- XF86AudioRaiseVolume
@@ -74,7 +75,7 @@ customPP = defaultPP
   , ppCurrent = xmobarColor "#729fcf" "" . wrap "[" "]"
   , ppUrgent = xmobarColor "#fce94f" "" . wrap "*" "*"
   , ppLayout = xmobarColor "#729fcf" ""
-  , ppTitle = xmobarColor "#babdb9" "" . shorten 80
+  , ppTitle = xmobarColor "#babdb9" "" . shorten 50
   , ppSep = "<fc=#555753> | </fc>"
   }
 

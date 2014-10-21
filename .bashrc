@@ -84,12 +84,12 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -lF'
+alias ll='ls -lhF'
 alias lla='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-alias dusort='du -sh * | sort -h'
+alias dusort='du -sh * | sort -h -r'
 alias srcbashrc='source $HOME/.bashrc'
 
 # Add an "alert" alias for long running commands.  Use like so:
@@ -111,6 +111,32 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+
+# Start ssh-agent
+SSH_ENV="$HOME/.ssh/environment"
+
+function start_agent {
+    echo "Initialising new SSH agent..."
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+    echo succeeded
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" > /dev/null
+    /usr/bin/ssh-add;
+    /usr/bin/ssh-add ~/.ssh/id_bitbucket
+}
+
+# Source SSH settings, if applicable
+
+if [ -f "${SSH_ENV}" ]; then
+    . "${SSH_ENV}" > /dev/null
+    #ps ${SSH_AGENT_PID} doesn't work under cywgin
+    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+        start_agent;
+    }
+else
+    start_agent;
+fi
+
 
 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 
