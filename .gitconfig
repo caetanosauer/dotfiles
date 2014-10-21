@@ -1,0 +1,17 @@
+[user]
+	email = csauer@cs.uni-kl.de
+	name = Caetano Sauer
+[core]
+	editor = vim
+	excludesfile = /home/csauer/work/hp/deptool.ignores
+[merge]
+	tool = kdiff3
+[deptool]
+	diff = difftool
+	config = 2011-12-07
+[alias]
+	st = status
+	co = checkout
+	br = branch
+	up = rebase
+	ci = commit
