@@ -15,5 +15,9 @@ dropboxd &
 $HOME/bin/ton &
 pasystray &
 wicd-client --tray &
+kbdd &
+
+# set keyboard layouts 0, 1, and 2
+setxkbmap -layout "de,de,us" -variant "nodeadkeys,legacy,"
 
 exec xmonad
