@@ -37,12 +37,14 @@ myManageHook = composeAll . concat $
     [ className=? w --> doShift "3" | w <- webs ],
     [ className=? w --> doShift "4" | w <- pdfs ],
     [ className=? w --> doShift "5" | w <- files ],
+    [ className=? w --> doShift "9" | w <- media ],
     [ className=? c --> doIgnore | c <- ignore ]
   ]
-  where floats = ["Gimp"]
+  where floats = ["Gimp", "Zenity"]
         webs = ["Firefox", "Chrome", "Google-chrome"]
-        pdfs = ["Adobe Reader", "Document Reader", "Okular"]
+        pdfs = ["Adobe Reader", "Document Reader", "Okular", "Mendeleydesktop.x86_64"]
         files = ["Nautilus", "Thunar"]
+        media = ["Spotify", "Deluge", "Filezilla"]
         ignore = ["trayer"]
 
 myLayoutHook = avoidStruts $ layoutHook defaultConfig
@@ -66,6 +68,12 @@ myKeys conf = M.union (keys defaultConfig conf) $ M.fromList $
   , ((0, 0x1008FF02), spawn "xbacklight +20")
   -- XF86MonBrightnessUp
   , ((0, 0x1008FF03), spawn "xbacklight -20")
+  -- Play
+  , ((0, 0x1008FF14), spawn "spotifyctl play")
+  -- Previous
+  , ((0, 0x1008FF16), spawn "spotifyctl prev")
+  -- Next
+  , ((0, 0x1008FF17), spawn "spotifyctl next")
   ]
 
 -- PrettyPrint (xmobar input with workspaces and window title)

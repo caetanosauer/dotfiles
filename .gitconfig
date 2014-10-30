@@ -15,3 +15,11 @@
 	br = branch
 	up = rebase
 	ci = commit
+[branch]
+	autosetuprebase = always
+[color]
+	ui = true
+	status = auto
+	branch = auto
+[push]
+	default = simple
