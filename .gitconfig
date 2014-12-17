@@ -11,10 +11,8 @@
 	config = 2011-12-07
 [alias]
 	st = status
-	co = checkout
-	br = branch
-	up = rebase
-	ci = commit
+        co = checkout
+        lg = log --oneline --graph
 [branch]
 	autosetuprebase = always
 [color]
