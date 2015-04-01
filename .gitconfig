@@ -21,3 +21,5 @@
 	branch = auto
 [push]
 	default = simple
+[init]
+	templatedir = ~/.git_template
