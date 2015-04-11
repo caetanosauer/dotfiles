@@ -59,11 +59,11 @@ myKeys conf = M.union (keys defaultConfig conf) $ M.fromList $
   , ((mod4Mask .|. shiftMask, xK_h), spawn "sudo -n pm-hibernate")
   , ((mod4Mask .|. shiftMask, xK_n), spawn "quicknote")
   -- XF86AudioLowerVolume
-  , ((0, 0x1008FF11), spawn "amixer set Master playback 3-")
+  , ((0, 0x1008FF11), spawn "pactl-decrease")
   -- XF86AudioRaiseVolume
-  , ((0, 0x1008FF13), spawn "amixer set Master playback 3+")
+  , ((0, 0x1008FF13), spawn "pactl-increase")
   -- XF86AudioMute
-  , ((0, 0x1008FF12), spawn "amixer set Master playback 0")
+  , ((0, 0x1008FF12), spawn "pactl-mute")
   -- XF86MonBrightnessUp
   , ((0, 0x1008FF02), spawn "xbacklight +20")
   -- XF86MonBrightnessUp
