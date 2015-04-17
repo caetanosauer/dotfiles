@@ -1,5 +1,6 @@
 [ui]
 username = Caetano Sauer <csauer@cs.uni-kl.de>
+editor = vim
 
 [hostfingerprints]
 lgis-devel.informatik.uni-kl.de = FC:33:CB:77:8A:C0:98:AC:30:F6:C7:1B:56:BA:13:75:31:A5:B0:64
