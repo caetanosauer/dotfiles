@@ -3,16 +3,13 @@
 	name = Caetano Sauer
 [core]
 	editor = vim
-	excludesfile = /home/csauer/work/hp/deptool.ignores
 [merge]
 	tool = kdiff3
-[deptool]
-	diff = difftool
-	config = 2011-12-07
 [alias]
 	st = status
         co = checkout
-        lg = log --oneline --graph
+        lg = log --oneline --graph --decorate
+        lgall = log --oneline --graph --decorate --all
 [branch]
 	autosetuprebase = always
 [color]
