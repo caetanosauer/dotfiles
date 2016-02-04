@@ -3,9 +3,6 @@
 # for examples
 
 export LANG="en_US.UTF-8"
-if [ "$(hostname)" == "csauer-laptop" ]; then
-    export LC_MONETARY="de_DE.UTF-8"
-fi
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
