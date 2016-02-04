@@ -20,8 +20,8 @@ URxvt.matcher.button: 1
 URxvt*urgentOnBell: true
 URxvt*visualBell:   false
  
-urxvt*foreground: white
-urxvt*background: black
+urxvt*foreground: #FFFFFF
+urxvt*background: #000000
 *color0:  #2E3436
 *color1:  #a40000
 *color2:  #4E9A06

@@ -58,6 +58,7 @@ myKeys conf = M.union (keys defaultConfig conf) $ M.fromList $
   , ((mod4Mask .|. shiftMask, xK_s), spawn "sudo -n pm-suspend")
   , ((mod4Mask .|. shiftMask, xK_h), spawn "sudo -n pm-hibernate")
   , ((mod4Mask .|. shiftMask, xK_n), spawn "quicknote")
+  , ((mod4Mask .|. shiftMask, xK_k), spawn "bash /home/csauer/bin/kbd 1")
   -- XF86AudioLowerVolume
   , ((0, 0x1008FF11), spawn "pactl-decrease")
   -- XF86AudioRaiseVolume
