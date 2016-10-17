@@ -9,15 +9,18 @@ fi
 
 [ -f $HOME/.Xresources ] && xrdb -merge $HOME/.Xresources         # update x resources db
 
-xscreensaver -no-splash &
-xsetroot -cursor_name left_ptr &
-dropboxd &
-$HOME/bin/ton &
-pasystray &
-wicd-client --tray &
-kbdd &
+# xscreensaver -no-splash &
+# xsetroot -cursor_name left_ptr &
+# dropboxd &
+# $HOME/bin/ton &
+# pasystray &
+# wicd-client --tray &
+# kbdd &
 
-# set keyboard layouts 0, 1, and 2
-setxkbmap -layout "de,de,us" -variant "nodeadkeys,legacy,"
+# # Old xmonad Ubuntu stuff
+# # set keyboard layouts 0, 1, and 2
+# setxkbmap -layout "de,de,us" -variant "nodeadkeys,legacy,"
+# exec xmonad
 
-exec xmonad
+setxkbmap -layout de -model pc105 -variant deadtilde
+exec startxfce4
