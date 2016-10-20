@@ -78,3 +78,4 @@
 # this to '1'.
 # Default: 0
 #EC2_ESTIMATE=0
+BYOBU_CHARMAP=UTF-8
