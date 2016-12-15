@@ -31,8 +31,6 @@ function! DiffFoldLevel()
 
     if l:line =~# '^\(diff\|Index\)'     " file
         return '>1'
-    elseif l:line =~# '^Only in' " file only in one folder when using diff -r
-        return '>1'
     elseif l:line =~# '^\(@@\|\d\)'  " hunk
         return '>2'
     elseif l:line =~# '^\*\*\* \d\+,\d\+ \*\*\*\*$' " context: file1
