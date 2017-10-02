@@ -104,3 +104,9 @@ XF86AudioStop
 "xbacklight -inc 25 -time 0 -steps 1"
     m:0x0 + c:233
     XF86MonBrightnessUp
+
+# Switch keyboard layouts
+"~/dotfiles/bin/kbdswitch.sh && pkill -RTMIN+10 i3block"
+    m:0x40 + c:107
+    Mod4 + Print
+
