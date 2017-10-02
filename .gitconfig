@@ -1,5 +1,6 @@
 [user]
-	email = csauer@cs.uni-kl.de
+	#email = csauer@cs.uni-kl.de
+	email = csauer@tableau.com
 	name = Caetano Sauer
 [core]
 	editor = vim
@@ -10,6 +11,8 @@
         co = checkout
         lg = log --oneline --graph --decorate
         lgall = log --oneline --graph --decorate --all
+	ll = log --pretty='format:%h %<(12,trunc)%ce %cd %s' --date=short
+	wd = diff --color-words='[A-z_][A-z0-9_]*'
 [branch]
 	autosetuprebase = always
 [color]
