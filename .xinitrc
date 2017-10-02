@@ -23,4 +23,7 @@ fi
 # exec xmonad
 
 setxkbmap -layout de -model pc105 -variant deadtilde
-exec startxfce4
+# exec startxfce4
+xbindkeys
+/usr/bin/dropbox &
+exec i3

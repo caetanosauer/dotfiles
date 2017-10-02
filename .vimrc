@@ -9,6 +9,8 @@ set shiftwidth=4
 autocmd FileType tex setlocal shiftwidth=2 
 autocmd FileType tex setlocal softtabstop=2 
 
+let g:tex_flavor = "latex"
+
 " In cpp code, remove trailing whitespace when saving
 autocmd FileType c,cpp autocmd BufWritePre <buffer> :%s/\s\+$//e
 
@@ -61,6 +63,20 @@ let g:tagbar_compact = 1 " remove help message and empty lines
 let g:tagbar_autoclose = 1 " close tagbar window when jumping to tag with Enter
 let g:tagbar_foldlevel = 0 " folds up to this level will be displayed folded initially
 
+" tagbar for latex
+" (http://stackoverflow.com/q/26145505/1268568)
+let g:tagbar_type_tex = {
+    \ 'ctagstype' : 'latex',
+    \ 'kinds'     : [
+        \ 's:sections',
+        \ 'g:graphics:0:0',
+        \ 'l:labels',
+        \ 'r:refs:1:0',
+        \ 'p:pagerefs:1:0'
+    \ ],
+    \ 'sort'    : 0,
+    \ }
+
 " Set syntax-based folding for source code
 autocmd FileType c setlocal foldmethod=syntax
 autocmd FileType cpp setlocal foldmethod=syntax
@@ -94,8 +110,25 @@ nnoremap <Leader>a :A<CR>
 " a.vim has insert-mode mappings for <leader>, which creates a delay when
 " typing the leader key in insert mode -- edited plugin/a.vim file!
 
-" display line numbers
-set number
+"Start scrolling when we're 8 lines away from margins
+set scrolloff=5
+set sidescrolloff=15
+set sidescroll=1
+
+"Toggle relative numbering, and set to absolute on loss of focus or insert mode
+set rnu
+function! ToggleNumbersOn()
+    set nu!
+    set rnu
+endfunction
+function! ToggleRelativeOn()
+    set rnu!
+    set nu
+endfunction
+autocmd FocusLost * call ToggleRelativeOn()
+autocmd FocusGained * call ToggleRelativeOn()
+autocmd InsertEnter * call ToggleRelativeOn()
+autocmd InsertLeave * call ToggleRelativeOn()
 
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse Latex-Suite. Set your grep
@@ -111,6 +144,9 @@ let g:tex_flavor='latex'
 " type in \ref{fig: and press <C-n> you will automatically cycle through
 " all the figure labels. Very useful!
 set iskeyword+=:
+
+" Set gnuplot filetype for corresponding file extension
+au BufNewFile,BufRead *.gp setf gnuplot
 
 " make PDF as default compilation target of vim-latex
 let g:Tex_DefaultTargetFormat='pdf'
@@ -171,7 +207,7 @@ nnoremap <silent> <leader>d :bp\|bd #<CR>
 nnoremap <C-c> :set paste! paste?<CR>
 " also in insert mode, which deisables Ctrl+C to exit insert mode
 " (which is a bad idea anyway)
-inoremap <C-c> :set paste! paste?<CR>
+inoremap <Esc><C-c> :set paste! paste?<CR>
 
 syntax on
 
@@ -185,9 +221,19 @@ let g:ycm_confirm_extra_conf = 0
 let g:lt_location_list_toggle_map = '<leader>l'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
 
-" vim-dispatch configuration
-autocmd FileType tex let b:dispatch = 'latexmk %'
-nnoremap <F9> :Dispatch<CR>
+" vim-dispatch configuration -> deprecated by plugin vimtex!
+" autocmd FileType tex let b:dispatch = 'latexmk %'
+" autocmd FileType tex let b:dispatch = 'latexmk main'
+" nnoremap <F9> :Dispatch<CR>
+
+" Disable overfull and underfull warnings on vimtex
+" let g:vimtex_quickfix_latexlog = { 'overfull' : 0, 'underfull' : 0 }
+
+" Do not open vimtex quickfix window if there are warnings but no errors
+let g:vimtex_quickfix_open_on_warning = 0
+
+" Use double quote for vimtex imaps rather than `, which is used to insert actual double quotes in the LaTeX output
+let g:vimtex_imaps_leader = '"'
 
 "-----------------------------------------
 " Vundle plugin
@@ -210,10 +256,14 @@ Plugin 'Valloric/ListToggle'
 Plugin 'sgeb/vim-diff-fold'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-speeddating'
 "Plugin 'rdnetto/YCM-Generator'
 Plugin 'tpope/vim-commentary'
 Plugin 'majutsushi/tagbar'
 Plugin 'SirVer/ultisnips'
+" Plugin 'altercation/vim-colors-solarized'
+Plugin 'jceb/vim-orgmode'
+Plugin 'lervag/vimtex'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
