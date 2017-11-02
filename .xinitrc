@@ -25,5 +25,5 @@ fi
 setxkbmap -layout de -model pc105 -variant deadtilde
 # exec startxfce4
 xbindkeys
-/usr/bin/dropbox &
+# /usr/bin/dropbox &
 exec i3
