@@ -1,0 +1,6 @@
+[user]
+	name = <your name>
+	email = csauer@tableau.com
+[alias]
+	ll = log --pretty='format:%h %<(12,trunc)%ce %cd %s' --date=short
+	wd = diff --color-words='[A-z_][A-z0-9_]*'
