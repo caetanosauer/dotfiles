@@ -30,7 +30,8 @@ font pango:Inconsolata 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+# bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec urxvt
 
 # kill focused window
 bindsym $mod+Shift+c kill
@@ -69,7 +70,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+x split h
+bindsym $mod+Shift+v split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -119,11 +120,13 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
-bindsym $mod+Shift+q reload
+bindsym $mod+q reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+q restart
+bindsym $mod+Shift+q restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+x exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# lock screen with i3lock
+bindsym $mod+x exec "i3lock -c 000000"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -158,11 +161,18 @@ bar {
         position top
 }
 
+# only show borders if screen is actually tiled with multiple windows
 hide_edge_borders smart
+
 new_window 1pixel
-bindsym $mod+Shift+z exec i3lock
 
 # Move the current workspace to the next output
 # # (effectively toggles when you only have two outputs)
 bindsym $mod+Shift+w move workspace to output left
 bindsym $mod+Shift+e move workspace to output right
+
+# execute xbindkeys on startup
+exec xbindkeys
+
+# set background color to a dark gray
+exec xsetroot -solid gray10
