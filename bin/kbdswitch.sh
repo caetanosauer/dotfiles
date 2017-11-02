@@ -12,6 +12,9 @@ elif [[ "$LAYOUT-$VARIANT" == "de-" ]]; then
     NEXT_LAYOUT=us
     NEXT_VARIANT=
 elif [[ "$LAYOUT-$VARIANT" == "us-intl" ]]; then
+    NEXT_LAYOUT=gb
+    NEXT_VARIANT=intl
+elif [[ "$LAYOUT-$VARIANT" == "gb-intl" ]]; then
     NEXT_LAYOUT=de
     NEXT_VARIANT=
 else
