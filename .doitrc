@@ -1,0 +1,5 @@
+secret /media/csauer-win/.ssh/doit_secret
+
+host csauer
+    map /media/csauer-data/ D:\
+    map /media/csauer-win/ C:\Users\csauer
