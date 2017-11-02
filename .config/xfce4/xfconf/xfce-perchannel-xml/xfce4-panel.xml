@@ -15,8 +15,6 @@
         <value type="int" value="8"/>
         <value type="int" value="6"/>
         <value type="int" value="1"/>
-        <value type="int" value="12"/>
-        <value type="int" value="2"/>
         <value type="int" value="5"/>
       </property>
       <property name="disable-struts" type="bool" value="false"/>
@@ -50,9 +48,12 @@
     <property name="plugin-6" type="string" value="systray">
       <property name="names-visible" type="array">
         <value type="string" value="vlc"/>
+        <value type="string" value="networkmanager applet"/>
+        <value type="string" value="update-notifier"/>
         <value type="string" value="skypeforlinux"/>
         <value type="string" value="thunar"/>
         <value type="string" value="google-chrome"/>
+        <value type="string" value="ibus panel"/>
       </property>
     </property>
     <property name="plugin-3" type="string" value="windowmenu">
