@@ -92,8 +92,11 @@ alias l='ls -CF'
 alias dusort='du -sh * | sort -h -r'
 alias srcbashrc='source $HOME/.bashrc'
 
+# force 256 colors in tmux
+alias tmux='tmux -2'
+
 # start vim as clientserver
-alias vim='vim --servername vim'
+# alias vim='vim --servername vim'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -144,3 +147,8 @@ fi
 # export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 
 export PATH=$HOME/bin:$HOME/opt/ghc/bin:$HOME/opt/cabal/bin:/opt/texbin:$HOME/.cabal/bin:$PATH
+
+# csauer: settings for doitclient
+DOIT_HOST=csauer
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
