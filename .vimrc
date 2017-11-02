@@ -106,6 +106,7 @@ set t_Co=256
 " make a.vim plugin (alternate between header and code) look in src and
 " include folders
 let g:alternateSearchPath = 'reg:|src|include|,reg:|include|src|'
+let g:alternateNoDefaultAlternate = 1
 nnoremap <Leader>a :A<CR>
 " a.vim has insert-mode mappings for <leader>, which creates a delay when
 " typing the leader key in insert mode -- edited plugin/a.vim file!
@@ -186,19 +187,20 @@ let &directory=my_tmp_dir
 " always keep PWD equal to directory of current buffer
 "set autochdir
 
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_extensions = ['buffertag', 'tag']
-" use CtrlP to search through buffers and buffertags
-map <C-b> :CtrlPBuffer <CR>
-" use CtrlPBufTagAll for search within all open buffers
-map <C-t> :CtrlPBufTagAll <CR>
-" use silversearch ag for faster searching, if available
-let g:ctrlp_clear_cache_on_exit = 0
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
+" TODO removed CtrlP; now using fzf
+" let g:ctrlp_map = '<c-p>'
+" let g:ctrlp_cmd = 'CtrlP'
+" let g:ctrlp_working_path_mode = 'ra'
+" let g:ctrlp_extensions = ['buffertag', 'tag']
+" " use CtrlP to search through buffers and buffertags
+" map <C-b> :CtrlPBuffer <CR>
+" " use CtrlPBufTagAll for search within all open buffers
+" map <C-t> :CtrlPBufTagAll <CR>
+" " use silversearch ag for faster searching, if available
+" let g:ctrlp_clear_cache_on_exit = 0
+" if executable('ag')
+"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" endif
 
 " delete buffer without closing split window
 nnoremap <silent> <leader>d :bp\|bd #<CR>
@@ -221,6 +223,12 @@ let g:ycm_confirm_extra_conf = 0
 let g:lt_location_list_toggle_map = '<leader>l'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
 
+" whitelist of local vimrc files to load without asking
+let g:localvimrc_whitelist='/home/tsi/csauer/dotfiles/.vimrc_hyper'
+" I can't make it stop asking if file should be loaded without a sanbox, so
+" disable it
+let g:localvimrc_sandbox = 0
+
 " vim-dispatch configuration -> deprecated by plugin vimtex!
 " autocmd FileType tex let b:dispatch = 'latexmk %'
 " autocmd FileType tex let b:dispatch = 'latexmk main'
@@ -235,6 +243,9 @@ let g:vimtex_quickfix_open_on_warning = 0
 " Use double quote for vimtex imaps rather than `, which is used to insert actual double quotes in the LaTeX output
 let g:vimtex_imaps_leader = '"'
 
+let g:matchparen_timeout = 2
+let g:matchparen_insert_timeout = 2
+
 "-----------------------------------------
 " Vundle plugin
 " ----------------------------------------
@@ -248,7 +259,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " My Bundles here:
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-vinegar'
 Plugin 'Valloric/YouCompleteMe'
@@ -257,13 +267,18 @@ Plugin 'sgeb/vim-diff-fold'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-speeddating'
-"Plugin 'rdnetto/YCM-Generator'
 Plugin 'tpope/vim-commentary'
 Plugin 'majutsushi/tagbar'
-Plugin 'SirVer/ultisnips'
-" Plugin 'altercation/vim-colors-solarized'
+" Plugin 'SirVer/ultisnips' -- not slow
 Plugin 'jceb/vim-orgmode'
-Plugin 'lervag/vimtex'
+" Plugin 'lervag/vimtex' -- not slow
+Plugin 'embear/vim-localvimrc'
+Plugin 'lyuts/vim-rtags'
+Plugin 'mhinz/vim-grepper'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+" Plugin 'scrooloose/nerdtree'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
