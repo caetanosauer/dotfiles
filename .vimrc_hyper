@@ -2,9 +2,6 @@
 set softtabstop=3
 set shiftwidth=3
 
-" gq command wraps text at 100 columns
-set textwidth=100
-
 " don't wrap, since hyper has very long lines
 set nowrap
 
