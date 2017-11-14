@@ -1,27 +1,22 @@
 " vimrc for hyper-specific settings
+
+" indentation length in hyper is 3
 set softtabstop=3
 set shiftwidth=3
 
 " don't wrap, since hyper has very long lines
 set nowrap
 
-let g:alternateSearchPath = 'reg:|dbcore|dbcore/include/dbcore|,reg:|dbcore/include/dbcore|dbcore|'
+" only execute commands below once for each vim instance, instead of once for each opened buffer
+" see doc for g:localvimrc_event
+if g:localvimrc_sourced_once
+  finish
+endif
 
-" let g:syntastic_cpp_checkers = ['clang_check', 'gcc']
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_cpp_clang_check_post_args = ""
+let g:alternateSearchPath = 'reg:|dbcore|dbcore/include/dbcore|,reg:|dbcore/include/dbcore|dbcore|'
 
 " Do not trigger YCM unless explicitly invoked
 let g:ycm_auto_trigger = 0
-
-" Search by filename only instead of full path in CtrlP (<C-d> to switch)
-let g:ctrlp_by_filename = 1
 
 " :CMakeToggle -- a command to toggle a variable g:cmake_target_dir between "debug" and "release"
 if (!exists("g:cmake_target_dir"))

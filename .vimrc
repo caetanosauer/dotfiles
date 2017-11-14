@@ -223,12 +223,6 @@ let g:ycm_confirm_extra_conf = 0
 let g:lt_location_list_toggle_map = '<leader>l'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
 
-" whitelist of local vimrc files to load without asking
-let g:localvimrc_whitelist='/home/tsi/csauer/dotfiles/.vimrc_hyper'
-" I can't make it stop asking if file should be loaded without a sanbox, so
-" disable it
-let g:localvimrc_sandbox = 0
-
 " vim-dispatch configuration -> deprecated by plugin vimtex!
 " autocmd FileType tex let b:dispatch = 'latexmk %'
 " autocmd FileType tex let b:dispatch = 'latexmk main'
@@ -245,6 +239,16 @@ let g:vimtex_imaps_leader = '"'
 
 let g:matchparen_timeout = 2
 let g:matchparen_insert_timeout = 2
+
+" TODO: I tried putting these in the after-directory, but it doesn't work for
+" some reason
+" whitelist of local vimrc files to load without asking
+let g:localvimrc_whitelist = ['/home/tsi/csauer/dotfiles/.vimrc_hyper', '/Users/csauer/dotfiles/.vimrc_hyper']
+" I can't make it stop asking if file should be loaded without a sandbox, so disable it
+let g:localvimrc_sandbox = 0
+
+" write rtags log to this file
+let g:rtagsLog = '~/.tmp/rtags.log'
 
 "-----------------------------------------
 " Vundle plugin
@@ -271,7 +275,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'majutsushi/tagbar'
 " Plugin 'SirVer/ultisnips' -- not slow
 Plugin 'jceb/vim-orgmode'
-" Plugin 'lervag/vimtex' -- not slow
+Plugin 'lervag/vimtex'
 Plugin 'embear/vim-localvimrc'
 Plugin 'lyuts/vim-rtags'
 Plugin 'mhinz/vim-grepper'
