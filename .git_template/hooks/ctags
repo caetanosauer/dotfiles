@@ -4,17 +4,16 @@ PATH="/usr/local/bin:$PATH"
 dir="`git rev-parse --git-dir`"
 #trap 'rm -f "$dir/$$.tags"' EXIT
 
+# csauer: switched from cscope to ctags (Nov 2017)
 # sed command converts newline into spaces
-cscope_files="`git ls-files | grep '.cpp$\|.h$' | sed ':a;N;$!ba;s/\n/ /g'`"
-
-cscope -b -q $cscope_files
-for f in in.out po.out out; do
-    mv cscope.$f $dir/
-done
-
+# cscope_files="`git ls-files | grep '.cpp$\|.h$' | sed ':a;N;$!ba;s/\n/ /g'`"
+# cscope -b -q $cscope_files
+# for f in in.out po.out out; do
+#     mv cscope.$f $dir/
+# done
 # Not needed anymore -- see file plugin/autoload_cscope.vim
 # export CSCOPE_DB="$dir/cscope.out"
 
 # tpope's original ctags version
-#ctags --tag-relative -L - -f"$dir/$$.tags" --languages=-javascript,sql
-#mv "$dir/$$.tags" "$dir/tags"
+ctags --tag-relative -L - -f"$dir/$$.tags" --languages=c++
+mv "$dir/$$.tags" "$dir/tags"
