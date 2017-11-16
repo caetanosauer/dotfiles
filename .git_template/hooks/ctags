@@ -2,7 +2,7 @@
 set -e
 PATH="/usr/local/bin:$PATH"
 dir="`git rev-parse --git-dir`"
-#trap 'rm -f "$dir/$$.tags"' EXIT
+trap 'rm -f "$dir/$$.tags"' EXIT
 
 # csauer: switched from cscope to ctags (Nov 2017)
 # sed command converts newline into spaces
@@ -15,5 +15,6 @@ dir="`git rev-parse --git-dir`"
 # export CSCOPE_DB="$dir/cscope.out"
 
 # tpope's original ctags version
-ctags --tag-relative -L - -f"$dir/$$.tags" --languages=c++
+git ls-files | \
+      ctags --tag-relative=yes -L - -f"$dir/$$.tags" --languages=c++
 mv "$dir/$$.tags" "$dir/tags"
