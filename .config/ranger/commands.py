@@ -59,3 +59,45 @@ class my_edit(Command):
         # This is a generic tab-completion function that iterates through the
         # content of the current directory.
         return self._tab_directory_content()
+
+# csauer: open files or directories with fzf
+class fzf_file(Command):
+    """
+    :fzf_file
+
+    Find a file using fzf.
+
+    See: https://github.com/junegunn/fzf
+    """
+    def execute(self):
+        import subprocess
+        import os.path
+        command="find -L . \( -path '*/\.*' -o -fstype 'dev' -o -fstype 'proc' \) -prune -o -print 2> /dev/null | sed 1d | cut -b3- | fzf +m"
+        fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
+        stdout, stderr = fzf.communicate()
+        if fzf.returncode == 0:
+            selected = os.path.abspath(stdout.decode('utf-8').rstrip('\n'))
+            if os.path.isdir(selected):
+                self.fm.cd(selected)
+            else:
+                self.fm.select_file(selected)
+
+# csauer: open directories with fzf
+class fzf_dir(Command):
+    """
+    :fzf_dir
+
+    Find a directory using fzf.
+
+    See: https://github.com/junegunn/fzf
+    """
+    def execute(self):
+        import subprocess
+        import os.path
+        # match only directories
+        command="find -L . \( -path '*/\.*' -o -fstype 'dev' -o -fstype 'proc' \) -prune -o -type d -print 2> /dev/null | sed 1d | cut -b3- | fzf +m"
+        fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
+        stdout, stderr = fzf.communicate()
+        if fzf.returncode == 0:
+            selected = os.path.abspath(stdout.decode('utf-8').rstrip('\n'))
+            self.fm.cd(selected)
