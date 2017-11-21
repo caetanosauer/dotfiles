@@ -3,7 +3,7 @@
 	email = csauer@tableau.com
 	name = Caetano Sauer
 [core]
-	editor = vim
+        #editor = vim
 	pager = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
 [merge]
 	tool = kdiff3

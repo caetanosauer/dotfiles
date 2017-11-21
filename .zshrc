@@ -95,3 +95,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="nvim"
 alias vimdiff="nvim -d"
+
+# Set default editor for git and other programs
+export VISUAL=nvim
+export EDITOR="$VISUAL"
