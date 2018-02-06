@@ -10,11 +10,15 @@
 [alias]
 	st = status
         co = checkout
-        lg = log --oneline --graph --decorate --branches
-        lgall = log --oneline --graph --decorate --all
+        # lg = log --oneline --graph --decorate --branches
+        # lgall = log --oneline --graph --decorate --all
+        lg = log --format='%C(yellow)%h%Creset %C(cyan)%<(8,trunc)%aE%Creset%Cgreen%ad%Creset%C(auto)%d %s' --decorate --graph --branches --date=format:'%F %r'
+        lgall = log --format='%C(yellow)%h%Creset %C(cyan)%<(8,trunc)%aE%Creset%Cgreen%ad%Creset%C(auto)%d %s' --decorate --graph --all --date=format:'%F %r'
 	ll = log --pretty='format:%h %<(12,trunc)%ce %cd %s' --date=short
 	wd = diff --color-words='[A-z_][A-z0-9_]*'
 	ctags = !.git/hooks/ctags
+	shead = show HEAD
+	amd = commit --amend
 [branch]
 	autosetuprebase = always
 [color]

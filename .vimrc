@@ -144,7 +144,9 @@ let g:tex_flavor='latex'
 " TIP: if you write your \label's as \label{fig:something}, then if you
 " type in \ref{fig: and press <C-n> you will automatically cycle through
 " all the figure labels. Very useful!
-set iskeyword+=:
+au FileType tex set iskeyword+=:
+" In C++ code, it's better to split classes and its methods/members
+au FileType cpp set iskeyword-=:
 
 " Set gnuplot filetype for corresponding file extension
 au BufNewFile,BufRead *.gp setf gnuplot
@@ -287,6 +289,7 @@ Plugin 'WuTheFWasThat/vimflowy'
 Plugin 'elzr/vim-json'
 Plugin 'tpope/vim-jdaddy'
 Plugin 'chrisbra/NrrwRgn'
+Plugin 'airblade/vim-gitgutter'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

@@ -100,4 +100,28 @@ alias vimdiff="nvim -d"
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
+# Fix weird terminal bug 
+# https://www.reddit.com/r/zsh/comments/2rfcba/sometimes_the_enter_key_prints_m_instead_of_doing/
+ttyctl -f
+
+# csauer: settings for doitclient
+DOIT_HOST=csauer
+
+# Vi mode
+bindkey -v
+# Use 0.1 sec delay when pressing ESC to go to normal mode
+export KEYTIMEOUT=1
+# Adds visual cue that we're in NORMAL mode to the prompt
+# https://dougblack.io/words/zsh-vi-mode.html
+function zle-line-init zle-keymap-select {
+    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]% %{$reset_color%}"
+    # TODO removed git_custom_status -- was it a custom function of the guy who posted this?
+    # RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $(git_custom_status) $EPS1"
+    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
+    zle reset-prompt
+}
+# Register function above with zle
+zle -N zle-line-init
+zle -N zle-keymap-select
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
