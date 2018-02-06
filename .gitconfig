@@ -4,9 +4,10 @@
 	name = Caetano Sauer
 [core]
         #editor = vim
-	pager = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
+	pager = diff-so-fancy | less --tabs=4 -RFX
+        #pager = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
 [merge]
-	tool = kdiff3
+        #tool = kdiff3
 [alias]
 	st = status
         co = checkout
