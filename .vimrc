@@ -291,6 +291,10 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 " Plugin 'scrooloose/nerdtree'
+Plugin 'WuTheFWasThat/vimflowy'
+Plugin 'elzr/vim-json'
+Plugin 'tpope/vim-jdaddy'
+Plugin 'chrisbra/NrrwRgn'
 Plugin 'airblade/vim-gitgutter'
 
 " All of your Plugins must be added before the following line
