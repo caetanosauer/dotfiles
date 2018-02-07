@@ -96,6 +96,9 @@ source $ZSH/oh-my-zsh.sh
 alias vim="nvim"
 alias vimdiff="nvim -d"
 
+# HipChat crashes with GPU support
+alias hipchat="hipchat4 --disable-gpu"
+
 # Set default editor for git and other programs
 export VISUAL=nvim
 export EDITOR="$VISUAL"

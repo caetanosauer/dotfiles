@@ -159,6 +159,7 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3blocks
         position top
+        tray_output primary
 }
 
 # only show borders if screen is actually tiled with multiple windows
