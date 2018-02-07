@@ -111,6 +111,15 @@ nnoremap <Leader>a :A<CR>
 " a.vim has insert-mode mappings for <leader>, which creates a delay when
 " typing the leader key in insert mode -- edited plugin/a.vim file!
 
+" mappings to close window and delete buffer without closing its window
+nnoremap <Leader>c :close<CR>
+nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
+" map :W to :w and :Q to :q
+command! Q q
+command! W w
+command! WQ wq
+command! Wq wq
+
 "Start scrolling when we're 8 lines away from margins
 set scrolloff=5
 set sidescrolloff=15
@@ -203,9 +212,6 @@ let &directory=my_tmp_dir
 " if executable('ag')
 "   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " endif
-
-" delete buffer without closing split window
-nnoremap <silent> <leader>d :bp\|bd #<CR>
 
 " toggle pastemode
 nnoremap <C-c> :set paste! paste?<CR>
