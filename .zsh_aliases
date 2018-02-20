@@ -1,0 +1,18 @@
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias vim="nvim"
+alias vimdiff="nvim -d"
+
+# HipChat crashes with GPU support
+alias hipchat="hipchat4 --disable-gpu"
+
+# Alias for sending current X clipboard to windows via doitclient
+alias wcopy="xclip -o | doitclient wclip"
+# ... and the other way around (paste from windows)
+alias wpaste="doitclient wclip -r | xclip -i"
