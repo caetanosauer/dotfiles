@@ -16,6 +16,7 @@ fi
 # pasystray &
 # wicd-client --tray &
 # kbdd &
+copyq &
 
 # # Old xmonad Ubuntu stuff
 # # set keyboard layouts 0, 1, and 2

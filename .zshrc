@@ -116,4 +116,8 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
+# set up fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# set up thefuck
+eval $(thefuck --alias)
