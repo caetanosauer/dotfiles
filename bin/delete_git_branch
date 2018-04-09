@@ -1,5 +1,5 @@
 #!/bin/zsh
-BRANCH=$(git branch | fzf)
+BRANCH=$(git branch | fzf | xargs echo) # trick: "xargs echo" trims whitespaces
 if [[ -n "$BRANCH" ]]; then
     git branch -D $BRANCH
     git push origin :$BRANCH
