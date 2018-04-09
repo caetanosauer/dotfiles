@@ -1,0 +1,3 @@
+#!/bin/zsh
+# TODO make sure doitclient is running; show error dialog if not (or if anything goes wrong)
+xsel -o | doitclient wclip
