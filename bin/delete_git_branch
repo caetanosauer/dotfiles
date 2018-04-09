@@ -1,0 +1,6 @@
+#!/bin/zsh
+BRANCH=$(git branch | fzf)
+if [[ -n "$BRANCH" ]]; then
+    git branch -D $BRANCH
+    git push origin :$BRANCH
+fi
