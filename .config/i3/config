@@ -45,6 +45,10 @@ bindsym $mod+Shift+c kill
 
 bindsym $mod+d exec --no-startup-id rofi -show run
 
+# TODO: testing fuzzyselector
+bindsym $mod+t exec "xterm -name floating -e python3 ~/dev/fuzzyselector/select.py"
+for_window [class="XTerm" instance="floating"] floating enable border pixel 3
+
 # change focus (vim keys)
 bindsym $mod+h focus left
 bindsym $mod+j focus down
