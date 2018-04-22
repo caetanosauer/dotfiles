@@ -1,0 +1,7 @@
+#!/bin/zsh
+# Select git branch and trim whitespaces
+BRANCH=$(git branch | fzf | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+if [[ -n "$BRANCH" ]]; then
+    git branch -D $BRANCH
+    git push origin :$BRANCH
+fi

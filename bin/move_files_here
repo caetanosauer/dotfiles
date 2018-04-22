@@ -1,0 +1,4 @@
+#!/bin/zsh
+DIR=$1
+[[ -z "$DIR" ]] && DIR=$HOME
+find $DIR -print0 | fzf -m --read0 --print0 | xargs -0 -I '{}' mv '{}' .

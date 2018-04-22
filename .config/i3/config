@@ -45,6 +45,10 @@ bindsym $mod+Shift+c kill
 
 bindsym $mod+d exec --no-startup-id rofi -show run
 
+# TODO: testing fuzzyselector
+bindsym $mod+t exec "xterm -name floating -e python3 ~/dev/fuzzyselector/select.py"
+for_window [class="XTerm" instance="floating"] floating enable border pixel 3
+
 # change focus (vim keys)
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -69,11 +73,15 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
-bindsym $mod+Shift+v split h
+# Commented out to use mod+c and mod+v as doitclient copy/paste (mod+Shift+j and stuff can achieve horizontal and vertical splits)
+# # split in horizontal orientation
+# bindsym $mod+Shift+v split h
+# # split in vertical orientation
+# bindsym $mod+v split v
 
-# split in vertical orientation
-bindsym $mod+v split v
+# copy and paste to/from windows with doitclient (eval req. for pipes)
+bindsym $mod+c exec copy_to_windows
+bindsym $mod+v exec paste_from_windows
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -159,6 +167,7 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3blocks
         position top
+        tray_output primary
 }
 
 # only show borders if screen is actually tiled with multiple windows

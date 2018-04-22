@@ -1,0 +1,5 @@
+#!/bin/zsh
+# Copy windows clipboard into selection buffer
+doitclient wclip -r | xsel -i
+# Paste selection buffer in the x11 app
+xdotool type $(xsel -o)

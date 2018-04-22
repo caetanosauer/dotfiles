@@ -111,6 +111,19 @@ nnoremap <Leader>a :A<CR>
 " a.vim has insert-mode mappings for <leader>, which creates a delay when
 " typing the leader key in insert mode -- edited plugin/a.vim file!
 
+" mappings to close window and delete buffer without closing its window
+nnoremap <Leader>c :close<CR>
+nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
+" map :W to :w and :Q to :q
+command! Q q
+command! W w
+command! WQ wq
+command! Wq wq
+
+"Format current line or current selection as json using python
+nnoremap <Leader>aj :.!python -m json.tool
+nnoremap <Leader>aJ :'<,'>!python -m json.tool
+
 "Start scrolling when we're 8 lines away from margins
 set scrolloff=5
 set sidescrolloff=15
@@ -204,9 +217,6 @@ let &directory=my_tmp_dir
 "   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " endif
 
-" delete buffer without closing split window
-nnoremap <silent> <leader>d :bp\|bd #<CR>
-
 " toggle pastemode
 nnoremap <C-c> :set paste! paste?<CR>
 " also in insert mode, which deisables Ctrl+C to exit insert mode
@@ -265,15 +275,17 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " My Bundles here:
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-vinegar'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Valloric/ListToggle'
 Plugin 'sgeb/vim-diff-fold'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
 Plugin 'majutsushi/tagbar'
 " Plugin 'SirVer/ultisnips' -- not slow
 Plugin 'jceb/vim-orgmode'
@@ -285,9 +297,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 " Plugin 'scrooloose/nerdtree'
-Plugin 'WuTheFWasThat/vimflowy'
 Plugin 'elzr/vim-json'
-Plugin 'tpope/vim-jdaddy'
 Plugin 'chrisbra/NrrwRgn'
 Plugin 'airblade/vim-gitgutter'
 
