@@ -1,0 +1,1 @@
+docker run -d --name vimflowy --mount source=vimflowy-db,target=/app/db -p 3000:3000 --restart unless-stopped vimflowy/vimflowy
