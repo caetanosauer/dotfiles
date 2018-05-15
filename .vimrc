@@ -121,8 +121,8 @@ command! WQ wq
 command! Wq wq
 
 "Format current line or current selection as json using python
-nnoremap <Leader>aj :.!python -m json.tool
-nnoremap <Leader>aJ :'<,'>!python -m json.tool
+nnoremap <Leader>aj :.!python -m json.tool<CR>
+nnoremap <Leader>aJ :'<,'>!python -m json.tool<CR>
 
 "Start scrolling when we're 8 lines away from margins
 set scrolloff=5
