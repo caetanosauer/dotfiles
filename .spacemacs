@@ -311,6 +311,12 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   )
 
+;; csauer
+ (setq ns-use-srgb-colorspace nil)
+;; Fix error on Linux (https://github.com/syl20bnr/spacemacs/issues/4755)
+(setq explicit-shell-file-name "/bin/zsh")
+(setq shell-file-name "zsh")
+
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
@@ -327,6 +333,3 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-;; csauer
- (setq ns-use-srgb-colorspace nil)
