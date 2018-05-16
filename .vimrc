@@ -121,8 +121,8 @@ command! WQ wq
 command! Wq wq
 
 "Format current line or current selection as json using python
-nnoremap <Leader>aj :.!python -m json.tool
-nnoremap <Leader>aJ :'<,'>!python -m json.tool
+nnoremap <Leader>aj :.!python -m json.tool<CR>
+vnoremap <Leader>aJ :'<,'>!python -m json.tool<CR>
 
 "Start scrolling when we're 8 lines away from margins
 set scrolloff=5
@@ -288,7 +288,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'majutsushi/tagbar'
 " Plugin 'SirVer/ultisnips' -- not slow
-Plugin 'jceb/vim-orgmode'
+" Plugin 'jceb/vim-orgmode'
 Plugin 'lervag/vimtex'
 Plugin 'embear/vim-localvimrc'
 Plugin 'lyuts/vim-rtags'
