@@ -2,7 +2,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # csauer: shut up perl warnings
-export LC_ALL=C
+# export LC_ALL=C
 
 # Set default editor for git and other programs
 export VISUAL=nvim
@@ -11,7 +11,9 @@ export EDITOR="$VISUAL"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then

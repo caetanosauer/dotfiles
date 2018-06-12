@@ -12,7 +12,7 @@ URxvt*loginShell: true
 ! Enable Shift-PageUp/Down in screen
 Urxvt*secondaryScroll:  true
 URxvt*saveLines: 5000
-URxvt*termName: rxvt-unicode
+URxvt*termName: rxvt-unicode-256color
 URxvt.perl-ext-common: default,matcher,resize-font
 URxvt.urlLauncher: firefox
 URxvt.matcher.button: 1
@@ -43,12 +43,27 @@ URxvt.allow_bold:           true
 /* URxvt*boldItalicFont: xft:source code pro for powerline:semibold:italic:pixelsize=18 */
 /* /1* URxvt*letterSpace: -1 *1/ */
 
+/* ! DejaVu Sans Mono Setup */
+/* URxvt*font: xft:DejaVu Sans Mono for Powerline:pixelsize=15 */
+/* URxvt*imFont: xft:DejaVu Sans Mono for Powerline:pixelsize=15 */
+/* URxvt*boldFont: xft:DejaVu Sans Mono Bold for Powerline:bold:pixelsize=15 */
+/* URxvt*letterSpace: 0 */
+/* URxvt*lineSpace: 1 */
+
 ! Inconsolata Setup
-URxvt*font: xft:Inconsolata-g for Powerline:regular:pixelsize=14
-URxvt*imFont: xft:Inconsolata-g for Powerline:regular:pixelsize=14
-URxvt*boldFont: xft:Inconsolata-g for Powerline:bold:pixelsize=14
-URxvt*letterSpace: 0
+URxvt*font: xft:Inconsolata-g for Powerline:regular:pixelsize=15,\
+            xft:Source Code Pro:pixelsize=18:style=medium:antialias=true,\
+            -*-unifont-*-*-*-*-*-*-*-*-*-*-*-*
+URxvt*imFont: xft:Inconsolata-g for Powerline:regular:pixelsize=15
+URxvt*boldFont: xft:Inconsolata-g for Powerline:bold:pixelsize=15
+URxvt*letterSpace: -1
 URxvt*lineSpace: 1
+
+/* URxvt*imLocale:                         en_US.utf8 */ 
+/* URxvt*iso14755:                         false */
+/* URxvt*iso14755_52:                      false */
+/* URxvt.clipboard.copycmd:                xsel -ib */
+/* URxvt.clipboard.pastecmd: xsel -ob */
 
 ! output of fc-list | grep consolata
 /* /home/tsi/csauer/.local/share/fonts/Inconsolata for Powerline.otf: Inconsolata for Powerline:style=Medium */
