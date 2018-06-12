@@ -4,16 +4,17 @@ Xcursor.theme: whiteglass
 URxvt*buffered: true
 URxvt*cursorBlink: true
 URxvt*underlineColor: yellow
-URxvt.font:  xft:inconsolata:size=10:antialias=true
+
 URxvt*depth: 32
 URxvt*borderless: 1
 URxvt*scrollBar: false
 URxvt*loginShell: true
-Urxvt*secondaryScroll:  true    # Enable Shift-PageUp/Down in screen
+! Enable Shift-PageUp/Down in screen
+Urxvt*secondaryScroll:  true
 URxvt*saveLines: 5000
 URxvt*termName: rxvt-unicode
 URxvt.perl-ext-common: default,matcher,resize-font
-URxvt.urlLauncher: google-chrome-stable
+URxvt.urlLauncher: firefox
 URxvt.matcher.button: 1
 URxvt.keysym.C-minus:     resize-font:smaller
 URxvt.keysym.C-plus:      resize-font:bigger
@@ -23,25 +24,54 @@ URxvt.keysym.C-question:  resize-font:show
 ! set window property 'urgent' when bell is received
 URxvt*urgentOnBell: true
 URxvt*visualBell:   false
- 
-! urxvt*foreground: #FFFFFF
-! urxvt*background: #000000
-! *color0:  #2E3436
-! *color1:  #a40000
-! *color2:  #4E9A06
-! *color3:  #C4A000
-! *color4:  #3465A4
-! *color5:  #75507B
-! *color6:  #ce5c00
-! *color7:  #babdb9
-! *color8:  #555753
-! *color9:  #EF2929
-! *color10: #8AE234
-! *color11: #FCE94F
-! *color12: #729FCF
-! *color13: #AD7FA8
-! *color14: #fcaf3e
-! *color15: #EEEEEC
+
+/* URxvt.font:  xft:DejaVuSansMono:size=10:antialias=true */
+
+Xft.dpi:                    96
+Xft.antialias:              true
+Xft.rgba:                   rgb
+Xft.hinting:                true
+Xft.hintstyle: hintslight
+URxvt.allow_bold:           true
+
+/* ! Source Code Pro Setup */
+/* URxvt.allow_bold:           true */
+/* URxvt*font: xft:source code pro for powerline:regular:pixelsize=18 */
+/* URxvt*imFont: xft:source code pro for powerline:regular:pixelsize=18 */
+/* URxvt*boldFont: xft:source code pro for powerline:semibold:pixelsize=18 */
+/* URxvt*italicFont: xft:source code pro for powerline:italic:pixelsize=18 */
+/* URxvt*boldItalicFont: xft:source code pro for powerline:semibold:italic:pixelsize=18 */
+/* /1* URxvt*letterSpace: -1 *1/ */
+
+! Inconsolata Setup
+URxvt*font: xft:Inconsolata-g for Powerline:regular:pixelsize=14
+URxvt*imFont: xft:Inconsolata-g for Powerline:regular:pixelsize=14
+URxvt*boldFont: xft:Inconsolata-g for Powerline:bold:pixelsize=14
+URxvt*letterSpace: 0
+URxvt*lineSpace: 1
+
+! output of fc-list | grep consolata
+/* /home/tsi/csauer/.local/share/fonts/Inconsolata for Powerline.otf: Inconsolata for Powerline:style=Medium */
+/* /home/tsi/csauer/.local/share/fonts/Inconsolata-dz for Powerline.otf: Inconsolata\-dz for Powerline:style=dz */
+/* /home/tsi/csauer/.local/share/fonts/Inconsolata Bold for Powerline.ttf: Inconsolata for Powerline:style=BoldForPowerline */
+/* /home/tsi/csauer/.local/share/fonts/Inconsolata-g for Powerline.otf: Inconsolata\-g for Powerline:style=g */
+/* /usr/share/fonts/truetype/inconsolata/Inconsolata.otf: Inconsolata:style=Medium */
+
+
+/* ! Ubuntu Mono Setup */
+/* URxvt.allow_bold:           true */
+/* URxvt*font: xft:ubuntu mono for powerline:regular:pixelsize=18 */
+/* URxvt*imFont: xft:ubuntu mono for powerline:regular:pixelsize=18 */
+/* URxvt*boldFont: xft:ubuntu mono for powerline:bold:pixelsize=18 */
+/* URxvt*italicFont: xft:ubuntu mono for powerline:italic:pixelsize=18 */
+/* URxvt*boldItalicFont: xft:ubuntu mono for powerline:bold:italic:pixelsize=18 */
+/* URxvt*letterSpace: -1 */
+
+! Meslo Setup
+/*URxvt.allow_bold:           false
+URxvt*font: xft:meslo lg s for powerline:regular:pixelsize=18
+URxvt*imFont: xft:meslo lg s for powerline:regular:pixelsize=18
+URxvt*letterSpace: -2*/
 
 ! special
  *.foreground:   #c5c8c6
