@@ -1,2 +1,11 @@
 #!/bin/sh
+
+# Re-generate ctags
 .git/hooks/ctags >/dev/null 2>&1 &
+
+# Run email-guess if checked out a freshly cloned repository (thus “previous SHA” is all zeros)
+# https://willi.am/blog/2015/02/27/dynamically-configure-your-git-email/
+if [[ $1 == 00000000000* ]]; then
+  git email-guess
+fi
+

@@ -22,6 +22,7 @@
         rb = rebase -i
         rbcont = rebase --continue
         showstat = show --stat --format='%s%nAuthor: %an%nCommiter: %cn'
+	email-guess = !. ~/dotfiles/bin/git_guess_email.sh
 [branch]
 	autosetuprebase = always
 [color]
