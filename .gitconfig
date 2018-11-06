@@ -20,6 +20,10 @@
 	ctags = !.git/hooks/ctags
 	shead = show HEAD
 	amd = commit --amend
+        ap = add -p
+        rb = rebase -i
+        rbcont = rebase --continue
+        showstat = show --stat --format='%s%nAuthor: %an%nCommiter: %cn'
 [branch]
 	autosetuprebase = always
 [color]
