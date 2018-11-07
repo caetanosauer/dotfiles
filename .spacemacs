@@ -329,6 +329,13 @@ you should place your code here."
 ;; csauer: use recursive percentage marks (from Org manual)
 (setq org-hierarchical-todo-statistics nil)
 
+;; csauer: custom TODO states and colors
+(setq org-todo-keywords
+  '((sequence "TODO" "NEXT" "WAIT" "DONE")))
+(setq org-todo-keyword-faces
+ '(("TODO" . "orange") ("NEXT" . "magenta") ("WAIT" . "firebrick") ("DONE" . "green"))
+)
+
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
