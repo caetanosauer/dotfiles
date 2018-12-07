@@ -3,9 +3,12 @@
 remote=`git remote -v | awk '/\(push\)$/ {print $2}'`
 email=caetanosauer@gmail.com # default
 
-if [[ $remote == *gitlab.tableausoftware.com* ]]; then
-  email=csauer@tableau.com
-fi
+
+case "$remote" in 
+    *gitlab.tableausoftware.com*)
+        email=csauer@tableau.com
+        ;;
+esac
 
 echo "========================================================================"
 echo "Configuring user.email as $email"

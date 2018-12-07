@@ -300,6 +300,8 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'elzr/vim-json'
 Plugin 'chrisbra/NrrwRgn'
 Plugin 'airblade/vim-gitgutter'
+" Hyper-specific syntax highlighting
+Plugin 'git@gitlab.tableausoftware.com:avogelsgesang/vim-hyper-test-syntax'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
