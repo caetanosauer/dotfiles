@@ -19,7 +19,7 @@
 	shead = show HEAD
 	amd = commit --amend
         ap = add -p
-        rb = rebase -i
+        rb = rebase -X patience -i
         rbcont = rebase --continue
         showstat = show --stat --format='%s%nAuthor: %an%nCommiter: %cn'
 	email-guess = !. ~/dotfiles/bin/git_guess_email.sh
