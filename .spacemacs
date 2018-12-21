@@ -365,3 +365,9 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; csauer
+(custom-theme-set-faces
+ 'sanityinc-tomorrow-night
+ '(org-tag                   ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+)
