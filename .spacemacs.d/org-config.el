@@ -16,6 +16,7 @@
 (setq org-todo-keyword-faces
  '(("TODO" . "orange") ("NEXT" . "magenta") ("WAIT" . "brown") ("DONE" . "green"))
 )
+
 ;; include archive files in clock reports
 (setq org-clocktable-defaults
  '(:maxlevel 2 :lang "en" :scope file-with-archives :block nil :wstart 1 :mstart 1 :tstart nil :tend nil :step nil :stepskip0 nil :fileskip0 nil :tags nil :emphasize nil :link nil :narrow 40! :indent t :formula % :timestamp nil :level nil :tcolumns nil :formatter nil)
@@ -25,6 +26,7 @@
 )
 ;; Count time in hours on clock table
 (setq org-duration-format (quote h:mm))
+
 ;; Only show clocked entries (no closed) in the agenda's log
 (setq org-agenda-log-mode-items '(clock))
 ;; Show log and report by default in agenda
@@ -37,27 +39,41 @@
 ;; Columns to show in the column view
 (setq org-columns-default-format "%40ITEM(Task) %9CLOCKSUM")
 
+;; custom agenda commands
+;; (setq org-agenda-custom-commands
+;;       '(
+;;         ;; org-super-agenda
+;;         ("c" "Mega Agenda"
+;;          ((agenda "" 
+;;           ((org-super-agenda-groups
+;;            '(
+;;              (:order-multi (1 (:name "Done today"
+;;                                      :and (:regexp "State \"DONE\""
+;;                                                    :log t))
+;;                               (:name "Clocked today"
+;;                                      :log t)))
+;;             )
+;;           ))))
+;;           ((todo "NEXT"))
+;;          (org-agenda nil "a"))
+;;         )
+;; )
+;;         (let ((org-agenda-custom-commands
+;;                '(("u" "Super view"
+;;                   ((agenda "" ((org-super-agenda-groups
+;;                                 '((:name "Today"
+;;                                          :time-grid t)))))
+;;                    (todo "" ((org-agenda-overriding-header "Projects")
+;;                              (org-super-agenda-groups
+;;                               '((:name none  ; Disable super group header
+;;                                        :children todo)
+;;                                 (:discard (:anything t)))))))))))
+;;           (org-agenda nil "u"))
+
 (setq org-agenda-custom-commands
       '(
-        ("c" "Mega Agenda" agenda
-         (org-super-agenda-mode)
-         ((org-super-agenda-groups
-           '(
-             (:name "Next Items"
-                    :tag ("NEXT" "outbox"))
-             (:name "Immersive + Deep"
-                    :tag ("@immersive" "@deep"))
-             (:name "Process + Shallow"
-                    :time-grid t
-                    :tag ("@process" "@shallow"))
-             (:name "Important"
-                    :priority "A")
-             (:name "Quick Picks"
-                    :effort< "0:30"
-                    )
-             (:priority<= "B"
-                          :scheduled future
-                          :order 1))))
-         (org-agenda nil "a"))
+        ("c" "Custom agenda"
+         ((agenda "")
+          (todo "NEXT")))
         )
 )

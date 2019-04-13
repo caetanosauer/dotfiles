@@ -342,7 +342,7 @@ you should place your code here."
  '(evil-want-Y-yank-to-eol nil)
  '(org-agenda-files
    (quote
-    ("~/Dropbox/notes/personal.org" "~/Dropbox/notes/work.org")))
+    ("~/Dropbox/notes/tools.org" "~/Dropbox/notes/personal.org" "~/Dropbox/notes/work.org")))
  '(org-startup-truncated nil)
  '(org-super-agenda-mode t)
  '(package-selected-packages

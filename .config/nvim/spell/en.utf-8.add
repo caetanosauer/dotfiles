@@ -1,6 +1,5 @@
-YCSB
+implementational
+reorganizable
 WAL
-proactively
-versioned
-versionable
-backported
+inlined
+idempotence
