@@ -309,6 +309,7 @@ Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'tommcdo/vim-exchange'
 Plugin 'junegunn/gv.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+" Plugin 'liuchengxu/vim-which-key'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -321,4 +322,6 @@ filetype plugin indent on    " required
 "  -----------------------------------------
 
  " Color scheme
- colorscheme nord
+set termguicolors
+set background=dark
+colorscheme nord
