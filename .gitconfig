@@ -21,7 +21,7 @@
         ap = add -p
         rb = rebase -X patience -i
         rbcont = rebase --continue
-        showstat = show --stat --format='%s%nAuthor: %an%nCommiter: %cn'
+        showstat = show --stat --format='%s%n%H%nAuthor: %an%nCommiter: %cn'
 	email-guess = !. ~/dotfiles/bin/git_guess_email.sh
 [branch]
 	autosetuprebase = always

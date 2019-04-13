@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ -n "$1" ]; then
+    ps auxc | grep $1 | fzf | awk '{print $2}' | xargs kill -9
+else
+    ps auxc | fzf | awk '{print $2}' | xargs kill -9
+fi

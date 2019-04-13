@@ -1,0 +1,2 @@
+#!/bin/bash
+abduco -a $(abduco | awk 'NR>1{print $4}' | rofi -dmenu)

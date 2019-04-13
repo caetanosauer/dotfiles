@@ -84,24 +84,12 @@ autocmd FileType cpp setlocal foldmethod=syntax
 " Shows command while it's typed
 set showcmd
 
-" Set colorscheme and remove gui toolbar
-if has("gui_running")
-    colorscheme csauer
-    set guioptions-=T
-    set guifont=Andale\ Mono\ 9
-else
-    colorscheme csauer
-endif
-
 " disable auto-commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " comment strings for vim-commentary
 autocmd FileType cmake set commentstring=#\ %s
 autocmd FileType cpp set commentstring=//\ %s
-
-" Set terminal colors to 256
-set t_Co=256
 
 " make a.vim plugin (alternate between header and code) look in src and
 " include folders
@@ -262,6 +250,18 @@ let g:localvimrc_sandbox = 0
 " write rtags log to this file
 let g:rtagsLog = '~/.tmp/rtags.log'
 
+" Interpret SGML files as XML for correct folding
+autocmd FileType sgml set filetype=xml
+
+" Fold XML elements (https://stackoverflow.com/a/46217327/1268568)
+augroup XML
+    autocmd!
+    autocmd FileType xml let g:xml_syntax_folding=1
+    autocmd FileType xml setlocal foldmethod=syntax
+    autocmd FileType xml setlocal foldlevel=1
+    autocmd FileType xml :syntax on
+ augroup END
+
 "-----------------------------------------
 " Vundle plugin
 " ----------------------------------------
@@ -278,6 +278,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Valloric/ListToggle'
 Plugin 'sgeb/vim-diff-fold'
+Plugin 'chrisbra/vim-diff-enhanced'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-fugitive'
@@ -298,10 +299,16 @@ Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 " Plugin 'scrooloose/nerdtree'
 Plugin 'elzr/vim-json'
-Plugin 'chrisbra/NrrwRgn'
+" Plugin 'chrisbra/NrrwRgn'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'junegunn/vim-peekaboo'
 " Hyper-specific syntax highlighting
 Plugin 'git@gitlab.tableausoftware.com:avogelsgesang/vim-hyper-test-syntax'
+Plugin 'caetanosauer/vim-syntax-extra'
+Plugin 'rafi/awesome-vim-colorschemes'
+Plugin 'tommcdo/vim-exchange'
+Plugin 'junegunn/gv.vim'
+Plugin 'octol/vim-cpp-enhanced-highlight'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -312,3 +319,6 @@ filetype plugin indent on    " required
 " ------------------------------------------
 "  Vundle plugin end
 "  -----------------------------------------
+
+ " Color scheme
+ colorscheme nord

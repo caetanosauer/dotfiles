@@ -356,7 +356,7 @@ you should place your code here."
  )
 
 ;; csauer
-(custom-theme-set-faces
- 'sanityinc-tomorrow-night
- '(org-tag                   ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
-)
+;; (custom-theme-set-faces
+;;  'sanityinc-tomorrow-night
+;;  '(org-tag                   ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+;; )
