@@ -48,10 +48,12 @@ This function should only modify configuration layer settings."
      org
      themes-megapack
      spell-checking
+     c-c++
+     syntax-checking
+     games
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     ;; syntax-checking
      ;; version-control
      )
 
@@ -471,6 +473,15 @@ you should place your code here."
 
 (load-file "~/.spacemacs.d/org-config.el")
 )
+
+;; interpret header files as c++
+(setq-default dotspacemacs-configuration-layers
+              '((c-c++ :variables c-c++-default-mode-for-headers 'c++-mode)))
+;; use rtags as c-c++ backend
+(setq-default dotspacemacs-configuration-layers
+              '((c-c++ :variables c-c++-backend 'rtags)))
+;; enable clang support(setq-default dotspacemacs-configuration-layers
+'((c-c++ :variables c-c++-enable-clang-support t))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
