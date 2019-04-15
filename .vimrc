@@ -6,13 +6,20 @@ set autoindent
 " typing Backspace and Delete
 set softtabstop=4
 set shiftwidth=4
-autocmd FileType tex setlocal shiftwidth=2 
-autocmd FileType tex setlocal softtabstop=2 
+autocmd FileType tex setlocal shiftwidth=2
+autocmd FileType tex setlocal softtabstop=2
 
 let g:tex_flavor = "latex"
 
+" Function and corresponding command to remove trailing whitespace
+function! TrailingWhitespaceRemove()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfunction
+command! TrailingWhitespaceRemove call TrailingWhitespaceRemove()
 " In cpp code, remove trailing whitespace when saving
-autocmd FileType c,cpp autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType c,cpp autocmd BufWritePre <buffer> :TrailingWhitespaceRemove
 
 " Set space key as leader
 let mapleader = " "
@@ -258,7 +265,7 @@ filetype off                   " required!
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" let Vundle manage Vundle required! 
+" let Vundle manage Vundle required!
 Plugin 'VundleVim/Vundle.vim'
 
 " My Bundles here:
