@@ -117,21 +117,8 @@ set scrolloff=5
 set sidescrolloff=15
 set sidescroll=1
 
-"Toggle relative numbering, and set to absolute on loss of focus or insert mode
-set rnu
-function! ToggleNumbersOn()
-    set nu!
-    set rnu
-endfunction
-function! ToggleRelativeOn()
-    set rnu!
-    set nu
-endfunction
-autocmd FocusLost * call ToggleRelativeOn()
-autocmd FocusGained * call ToggleRelativeOn()
-autocmd InsertEnter * call ToggleRelativeOn()
-autocmd InsertLeave * call ToggleRelativeOn()
-
+" Relative numbering (hybrid style provided by vim-numbertoggle)
+set number relativenumber
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse Latex-Suite. Set your grep
 " program to always generate a file-name.
@@ -310,6 +297,7 @@ Plugin 'tommcdo/vim-exchange'
 Plugin 'junegunn/gv.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 " Plugin 'liuchengxu/vim-which-key'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
