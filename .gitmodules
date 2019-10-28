@@ -1,0 +1,6 @@
+[submodule "bin/z"]
+	path = bin/z
+	url = https://github.com/rupa/z.git
+[submodule ".zsh_custom/plugins/fzf-z"]
+	path = .zsh_custom/plugins/fzf-z
+	url = https://github.com/andrewferrier/fzf-z.git

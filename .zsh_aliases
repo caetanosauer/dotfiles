@@ -16,3 +16,9 @@ alias hipchat="hipchat4 --disable-gpu"
 alias wcopy="xclip -o | doitclient wclip"
 # ... and the other way around (paste from windows)
 alias wpaste="doitclient wclip -r | xclip -i"
+
+# fd, a `find` alternative
+alias fd="fdfind"
+
+# watson time tracker
+alias w="watson"
