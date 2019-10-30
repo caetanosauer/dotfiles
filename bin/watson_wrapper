@@ -32,6 +32,7 @@ if [ $# -eq 0 ]; then
     if [ "$WSTATUS" != "No project started." ]; then
         STOP_OUTPUT=$($WATSON stop)
         [ $? -eq 0 ] || die "Failed to stop project: $STOP_OUTPUT"
+        notify-send "$STOP_OUTPUT"
     else
         # TODO cannot add tags
         NEW_PROJECT=$($WATSON projects | $ROFI -dmenu)
