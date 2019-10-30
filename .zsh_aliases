@@ -20,5 +20,5 @@ alias wpaste="doitclient wclip -r | xclip -i"
 # fd, a `find` alternative
 alias fd="fdfind"
 
-# watson time tracker
-alias w="watson"
+# watson time tracker (my own wrapper)
+alias w="watson_wrapper"
