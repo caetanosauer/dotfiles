@@ -48,6 +48,10 @@ set formatoptions+=l
 set lbr
 set nolist
 
+" replace selected text in visual mode
+" https://stackoverflow.com/questions/676600/vim-search-and-replace-selected-text
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
 " make help window open a vertical split
 cnoremap help vert help
 
@@ -58,6 +62,8 @@ cnoremap help vert help
 set foldminlines=3
 " folds only until depth 2 (functions, classes, top-level comments -- possibly inside namespace)
 set foldnestmax=2
+" do not fold by default
+set nofoldenable
 
 " Search for tags in ancestor directories
 set tags=./tags;/
@@ -207,12 +213,6 @@ inoremap <Esc><C-c> :set paste! paste?<CR>
 
 syntax on
 
-" YouCompleteMe configuration
-let g:ycm_always_populate_location_list = 1
-let g:ycm_show_diagnostics_ui = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_confirm_extra_conf = 0
-
 " ListToggle plugin
 let g:lt_location_list_toggle_map = '<leader>l'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
@@ -256,6 +256,22 @@ augroup XML
     autocmd FileType xml :syntax on
  augroup END
 
+" Use limelight automatically when invoking goyo
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
+" Configure clangd as language server
+let g:LanguageClient_serverCommands = {
+  \ 'cpp': ['/home/tsi/csauer/hive-cache/devtoolsets/clang/7.0.0.180917174346/redhat7/bin/clangd'],
+  \ }
+
+" " Configure cquery as language server
+" let g:LanguageClient_serverCommands = {
+"     \ 'cpp': ['/home/csauer/builds/cquery/build/cquery', 
+"     \ '--log-file=/tmp/cq.log', 
+"     \ '--init={"cacheDirectory":"/tmp/cquery/"}']                                                                                                                                                                              
+"     \ }
+
 "-----------------------------------------
 " Vundle plugin
 " ----------------------------------------
@@ -269,7 +285,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " My Bundles here:
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'Valloric/ListToggle'
 Plugin 'sgeb/vim-diff-fold'
 Plugin 'chrisbra/vim-diff-enhanced'
@@ -283,28 +298,34 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'majutsushi/tagbar'
 " Plugin 'SirVer/ultisnips' -- not slow
-" Plugin 'jceb/vim-orgmode'
 Plugin 'lervag/vimtex'
 Plugin 'embear/vim-localvimrc'
-Plugin 'lyuts/vim-rtags'
+" Plugin 'lyuts/vim-rtags'
 Plugin 'mhinz/vim-grepper'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
+Plugin 'junegunn/vim-peekaboo'
+Plugin 'junegunn/gv.vim'
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
 " Plugin 'scrooloose/nerdtree'
 Plugin 'elzr/vim-json'
 " Plugin 'chrisbra/NrrwRgn'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'junegunn/vim-peekaboo'
 " Hyper-specific syntax highlighting
 Plugin 'git@gitlab.tableausoftware.com:avogelsgesang/vim-hyper-test-syntax'
 Plugin 'caetanosauer/vim-syntax-extra'
-Plugin 'rafi/awesome-vim-colorschemes'
+Plugin 'caetanosauer/nord-vim'
+" Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'tommcdo/vim-exchange'
-Plugin 'junegunn/gv.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 " Plugin 'liuchengxu/vim-which-key'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'godlygeek/tabular'
+" Plugin 'autozimu/LanguageClient-neovim'
+Plugin 'dense-analysis/ale'
+Plugin 'wincent/vcs-jump'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -318,5 +339,5 @@ filetype plugin indent on    " required
 
  " Color scheme
 set termguicolors
-set background=dark
+" set background=dark
 colorscheme nord
