@@ -49,7 +49,16 @@ COMPLETION_WAITING_DOTS="true"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+ZSH_CUSTOM=~/dotfiles/.zsh_custom
+
+# set up fzf before loading plugin below
+export FZF_BASE=~/.vim/bundle/fzf
+export DISABLE_FZF_KEY_BINDINGS="false"
+# Apparently this is not needed anymore?
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Make fzf use fd instead of find: it is faster and also respects .gitignore
+# Note that fd is an alias to fdfind
+export FZF_DEFAULT_COMMAND='fdfind --type f'
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -58,6 +67,8 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(
   git
   fzf
+  fzf-z
+  vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -87,8 +98,14 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-# set up fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # set up thefuck
 eval $(thefuck --alias)
+
+# Fix for Tilix terminal
+# https://gnunn1.github.io/tilix-web/manual/vteconfig/
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+    source /etc/profile.d/vte.sh
+fi
+
+# load z tool
+source ~/dotfiles/bin/z/z.sh

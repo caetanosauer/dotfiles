@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# A wrapper script for watson, the time tracking tool
+
+function die() {
+    echo "$*" 1>&2 ;
+    notify-send "$*"
+    exit 1;
+}
+
+WATSON=$(which watson)
+if [ -z "$WATSON" ]; then
+    # Workaround for pip installation
+    WATSON_FALLBACK="$HOME/.local/bin/watson"
+    if [ -x "$WATSON_FALLBACK" ]; then
+        WATSON=$WATSON_FALLBACK;
+    else
+        die "watson not found"
+    fi
+fi
+
+# Specify which "choose" program to use, depending on environment
+# TODO allow to type a new value not in the choice list?
+CHOOSE_APP_NAME=rofi
+CHOOSE_APP_ARGS="-dmenu"
+if ! xset q &>/dev/null; then
+    # No X server running: use fzf in termnal
+    CHOOSE_APP_NAME=fzf
+    CHOOSE_APP_ARGS=
+fi
+# Verify that it is installed and available in the PATH
+CHOOSE=$(which $CHOOSE_APP_NAME)
+if [ -z "$CHOOSE" ]; then
+    die "$CHOOSE_APP_NAME not found"
+fi
+CHOOSE="$CHOOSE $CHOOSE_APP_ARGS"
+
+# When invoked without arguments, the behavior depends on current state:
+# 1) If a project is currently being tracked, stop it.
+# 2) Otherwise, open rofi to choose from a previous project or type in a new one.
+if [ $# -eq 0 ]; then
+    WSTATUS=$($WATSON status -p)
+    if [ "$WSTATUS" != "No project started." ]; then
+        STOP_OUTPUT=$($WATSON stop)
+        [ $? -eq 0 ] || die "Failed to stop project: $STOP_OUTPUT"
+        notify-send "$STOP_OUTPUT"
+    else
+        # TODO cannot add tags
+        NEW_PROJECT=$($WATSON projects | $CHOOSE)
+        # Rofi returned non-zero: probably nothing picked (Esc or Ctrl+C)
+        [ $? -eq 0 ] || exit 0
+        # Start new project
+        START_OUTPUT=$($WATSON start $NEW_PROJECT)
+        [ $? -eq 0 ] || die "Failed to stop project: $STOP_OUTPUT"
+        notify-send "$START_OUTPUT"
+    fi
+    # TODO send notification to i3blocks to change status immediately
+    # We're done now, bye
+    exit 0;
+fi
+
+# If arguments are given, just run watson
+$WATSON $*
+exit $?

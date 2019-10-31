@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# A script to capture text into my inbox file
+INBOX_FILE=~/notes/inbox.txt
+
+function die() {
+    echo "$*" 1>&2 ;
+    notify-send "$*"
+    exit 1;
+}
+
+# zenity is the program used to capture input -- make sure it's installed
+if ! which zenity; then
+    die "ERROR: Cannot capture inbox item! zenity not installed"
+fi
+
+RESPONSE=$(zenity --entry --title "Capture to inbox" --text "What would you like to capture?")
+RETCODE=$?
+
+if [ $RETCODE -ne 0 ] || [ -z "$RESPONSE" ]; then
+    # nothing to capture
+    echo "Nothing to capture"
+    exit 0
+fi
+
+echo $RESPONSE
+echo $RESPONSE >> $INBOX_FILE
+
+# sanity check
+LAST_LINE=$(tail -n 1 $INBOX_FILE)
+if [ "$LAST_LINE" != "$RESPONSE" ]; then
+    die "ERROR: capture failed! line not found"
+fi
