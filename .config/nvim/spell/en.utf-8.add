@@ -3,3 +3,13 @@ reorganizable
 WAL
 inlined
 idempotence
+inline
+Multiversioning
+timestamp
+checkpointer
+PostgreSQL
+misconfigured
+underperforming
+overperforming
+versioned
+sec:impl:continuouscheckpointing/!

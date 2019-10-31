@@ -211,6 +211,9 @@ nnoremap <C-c> :set paste! paste?<CR>
 " (which is a bad idea anyway)
 inoremap <Esc><C-c> :set paste! paste?<CR>
 
+" vimtex recommend this before "syntax on"
+filetype plugin indent on
+
 syntax on
 
 " YouCompleteMe configuration
