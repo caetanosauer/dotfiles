@@ -17,6 +17,12 @@
  '(("TODO" . "orange") ("NEXT" . "magenta") ("WAIT" . "brown") ("DONE" . "green"))
 )
 
+;; swap default keybindings for inserting new heading
+(spacemacs/set-leader-keys "ih" 'org-insert-heading-after-current)
+(spacemacs/set-leader-keys "iH" 'org-insert-heading)
+;; enter insert mode after inserting a heading
+(add-hook 'org-insert-heading-hook 'evil-insert-state)
+
 ;; include archive files in clock reports
 (setq org-clocktable-defaults
  '(:maxlevel 2 :lang "en" :scope file-with-archives :block nil :wstart 1 :mstart 1 :tstart nil :tend nil :step nil :stepskip0 nil :fileskip0 nil :tags nil :emphasize nil :link nil :narrow 40! :indent t :formula % :timestamp nil :level nil :tcolumns nil :formatter nil)

@@ -3,3 +3,4 @@ reorganizable
 WAL
 inlined
 idempotence
+versioned
