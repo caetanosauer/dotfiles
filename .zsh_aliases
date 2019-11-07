@@ -9,9 +9,6 @@
 alias vim="nvim"
 alias vimdiff="nvim -d"
 
-# HipChat crashes with GPU support
-alias hipchat="hipchat4 --disable-gpu"
-
 # Alias for sending current X clipboard to windows via doitclient
 alias wcopy="xclip -o | doitclient wclip"
 # ... and the other way around (paste from windows)

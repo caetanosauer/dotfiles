@@ -68,6 +68,10 @@ set nofoldenable
 " Search for tags in ancestor directories
 set tags=./tags;/
 
+" ALE config for C++ (TODO move to filetype)
+let g:ale_lint_on_enter = 1
+let g:ale_linters = {'cpp': ['clang']}
+
 " tagbar plugin (http://www.vim.org/scripts/script.php?script_id=3465)
 nmap <Leader>o :TagbarToggle<CR>
 let g:tagbar_autofocus = 1 " when tagbar window is toggled, focus into it
@@ -103,6 +107,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " comment strings for vim-commentary
 autocmd FileType cmake set commentstring=#\ %s
 autocmd FileType cpp set commentstring=//\ %s
+autocmd FileType sql setlocal commentstring=--\ %s
 
 " make a.vim plugin (alternate between header and code) look in src and
 " include folders
@@ -190,21 +195,6 @@ let &directory=my_tmp_dir
 " always keep PWD equal to directory of current buffer
 "set autochdir
 
-" TODO removed CtrlP; now using fzf
-" let g:ctrlp_map = '<c-p>'
-" let g:ctrlp_cmd = 'CtrlP'
-" let g:ctrlp_working_path_mode = 'ra'
-" let g:ctrlp_extensions = ['buffertag', 'tag']
-" " use CtrlP to search through buffers and buffertags
-" map <C-b> :CtrlPBuffer <CR>
-" " use CtrlPBufTagAll for search within all open buffers
-" map <C-t> :CtrlPBufTagAll <CR>
-" " use silversearch ag for faster searching, if available
-" let g:ctrlp_clear_cache_on_exit = 0
-" if executable('ag')
-"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-" endif
-
 " toggle pastemode
 nnoremap <C-c> :set paste! paste?<CR>
 " also in insert mode, which deisables Ctrl+C to exit insert mode
@@ -262,6 +252,9 @@ augroup XML
 " Use limelight automatically when invoking goyo
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
+
+" consider only git-controlled files in fzf Tags search (fdfind respects .gitignore by default)
+let g:fzf_tags_command = 'fdfind --type f --exclude="docs/" | ctags -R --links=no -L -'
 
 " Configure clangd as language server
 let g:LanguageClient_serverCommands = {

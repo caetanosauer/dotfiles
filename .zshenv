@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/opt/bison/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/opt/cmake/bin:/usr/local/opt/bison/bin:/usr/local/bin:$PATH
 
 # csauer: shut up perl warnings
 # export LC_ALL=C
