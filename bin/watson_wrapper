@@ -2,9 +2,16 @@
 
 # A wrapper script for watson, the time tracking tool
 
+function notify() {
+    if [ -n "$DISPLAY" ]; then
+        notify-send "$*"
+    else
+        echo "$*" 1>&2 ;
+    fi
+}
+
 function die() {
-    echo "$*" 1>&2 ;
-    notify-send "$*"
+    notify "$*"
     exit 1;
 }
 
@@ -43,7 +50,7 @@ if [ $# -eq 0 ]; then
     if [ "$WSTATUS" != "No project started." ]; then
         STOP_OUTPUT=$($WATSON stop)
         [ $? -eq 0 ] || die "Failed to stop project: $STOP_OUTPUT"
-        notify-send "$STOP_OUTPUT"
+        notify "$STOP_OUTPUT"
     else
         # TODO cannot add tags
         NEW_PROJECT=$($WATSON projects | $CHOOSE)
@@ -52,12 +59,26 @@ if [ $# -eq 0 ]; then
         # Start new project
         START_OUTPUT=$($WATSON start $NEW_PROJECT)
         [ $? -eq 0 ] || die "Failed to stop project: $STOP_OUTPUT"
-        notify-send "$START_OUTPUT"
+        notify "$START_OUTPUT"
     fi
     # TODO send notification to i3blocks to change status immediately
     # We're done now, bye
     exit 0;
 fi
+
+# Wrapper for more compact status output
+if [ $# -eq 1 ] && [ "$1" == "status" ]; then
+    WSTATUS=$($WATSON status)
+    if [ "$WSTATUS" == "No project started." ]; then
+        echo "no project "
+    else
+        echo -n $($WATSON status -p) "- "
+        echo -n $($WATSON status -e)
+        echo " "
+    fi
+    exit 0
+fi
+
 
 # If arguments are given, just run watson
 $WATSON $*

@@ -23,6 +23,8 @@
         rbcont = rebase --continue
         showstat = show --stat --format='%s%n%H%nAuthor: %an%nCommiter: %cn'
 	email-guess = !. ~/dotfiles/bin/git_guess_email.sh
+        # pull master without checkout
+        pullmaster = fetch origin master:master
 [branch]
 	autosetuprebase = always
 [color]

@@ -19,6 +19,7 @@ function! TrailingWhitespaceRemove()
 endfunction
 command! TrailingWhitespaceRemove call TrailingWhitespaceRemove()
 " In cpp code, remove trailing whitespace when saving
+" TODO do this in some sort of format/tidy command/script
 autocmd FileType c,cpp autocmd BufWritePre <buffer> :TrailingWhitespaceRemove
 
 " Set space key as leader
@@ -50,6 +51,8 @@ set nolist
 
 " replace selected text in visual mode
 " https://stackoverflow.com/questions/676600/vim-search-and-replace-selected-text
+" 1. copy selection into register h
+" 2. search-replace with contents of register h and place cursor on replace part
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " make help window open a vertical split
@@ -67,10 +70,6 @@ set nofoldenable
 
 " Search for tags in ancestor directories
 set tags=./tags;/
-
-" ALE config for C++ (TODO move to filetype)
-let g:ale_lint_on_enter = 1
-let g:ale_linters = {'cpp': ['clang']}
 
 " tagbar plugin (http://www.vim.org/scripts/script.php?script_id=3465)
 nmap <Leader>o :TagbarToggle<CR>
@@ -109,26 +108,58 @@ autocmd FileType cmake set commentstring=#\ %s
 autocmd FileType cpp set commentstring=//\ %s
 autocmd FileType sql setlocal commentstring=--\ %s
 
-" make a.vim plugin (alternate between header and code) look in src and
-" include folders
-let g:alternateSearchPath = 'reg:|src|include|,reg:|include|src|'
-let g:alternateNoDefaultAlternate = 1
-nnoremap <Leader>a :A<CR>
-" a.vim has insert-mode mappings for <leader>, which creates a delay when
-" typing the leader key in insert mode -- edited plugin/a.vim file!
-
 " mappings to close window and delete buffer without closing its window
 nnoremap <Leader>c :close<CR>
 nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
+
+" smart-case searching
+set ignorecase
+set smartcase
+
+" When searching, n always goes forward and N backwards
+" https://unix.stackexchange.com/questions/371252/vim-continued-forward-backward-search-direction
+" <expr> is explained here: https://vim.fandom.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_1)
+nnoremap <expr> n (v:searchforward ? 'n' : 'N')
+nnoremap <expr> N (v:searchforward ? 'N' : 'n')
+
 " map :W to :w and :Q to :q
 command! Q q
 command! W w
 command! WQ wq
 command! Wq wq
 
-"Format current line or current selection as json using python
-nnoremap <Leader>aj :.!python -m json.tool<CR>
-vnoremap <Leader>aJ :'<,'>!python -m json.tool<CR>
+
+" TODO experimenting with running commands and reading their output from vim.
+nnoremap <Leader>as :.!bash<CR>
+vnoremap <Leader>as :'<,'>!bash<CR>
+" This one runs the current line and pastes the results below it
+nnoremap <Leader>aS yyp:.!bash<CR>
+" Other ideas
+" :%w !python -- runs whole buffer in python and shows result in terminal
+" TODO how to generalize this to arbitrary ranges
+" TODO unify this with json formatting stuff
+" Format current line or current selection as json using python
+" nnoremap <Leader>aj :.!python -m json.tool<CR>
+" vnoremap <Leader>aj :'<,'>!python -m json.tool<CR>
+" Better: using jq which is faster
+nnoremap <Leader>aj :.!jq .<CR>
+vnoremap <Leader>aj :'<,'>!jq .<CR>
+" Evaluate and replace current selection as a python expression
+" see this example to run a selection through a calculator
+" @" refers to the contents of the " register (see :help quotequote)
+" TODO wrap this in function PythonEvaluate
+vnoremap <Leader>ac c<C-R>=system('python -c "print(' . @" . ', end=\"\")"')<CR><Esc>
+
+" Disable concealing of quotes in vim-json plugin
+let g:vim_json_syntax_conceal = 0
+" TODO another option is to set "conceallevel" and maybe add a keybinding
+" Can I actually use conceal but then only reveal quotes in isert mode? I
+" think that would be the best
+
+" Faster shortcut to save file than :w
+nnoremap <Leader>w :update<CR>
+inoremap <C-s> <Esc>:update<CR>
+nnoremap <C-s> <Esc>:update<CR>
 
 "Start scrolling when we're 8 lines away from margins
 set scrolloff=5
@@ -168,10 +199,6 @@ let g:Tex_MultipleCompileFormats='pdf'
 " shortcut to save and compile latex when in insert mode
 autocmd Filetype tex inoremap <buffer> <C-k> <Esc> :update <CR> <Leader> ll <CR>
 autocmd Filetype tex noremap <buffer> <C-k> <Esc> :update <CR> <Leader> ll <CR>
-
-" For other filetypes, <C-k> just exits insert mode and saves
-autocmd Filetype tex inoremap <buffer> <C-k> <Esc> :update <CR>
-autocmd Filetype tex noremap <buffer> <C-k> <Esc> :update <CR>
 
 " Use english for spellchecking, but don't spellcheck by default
 if version >= 700
@@ -232,7 +259,12 @@ let g:matchparen_insert_timeout = 2
 " whitelist of local vimrc files to load without asking
 let g:localvimrc_whitelist = ['/home/tsi/csauer/dotfiles/.vimrc_hyper', '/Users/csauer/dotfiles/.vimrc_hyper']
 " I can't make it stop asking if file should be loaded without a sandbox, so disable it
+" TODO can I make this a command to run with projectionist?
 let g:localvimrc_sandbox = 0
+
+" interpret .log files as jsonl for hyper (TODO make it check if json is well
+" formatted and then give up if not)
+autocmd BufNewFile,BufRead *.log setlocal filetype=json
 
 " write rtags log to this file
 let g:rtagsLog = '~/.tmp/rtags.log'
@@ -256,17 +288,11 @@ autocmd! User GoyoLeave Limelight!
 " consider only git-controlled files in fzf Tags search (fdfind respects .gitignore by default)
 let g:fzf_tags_command = 'fdfind --type f --exclude="docs/" | ctags -R --links=no -L -'
 
-" Configure clangd as language server
-let g:LanguageClient_serverCommands = {
-  \ 'cpp': ['/home/tsi/csauer/hive-cache/devtoolsets/clang/7.0.0.180917174346/redhat7/bin/clangd'],
-  \ }
-
-" " Configure cquery as language server
-" let g:LanguageClient_serverCommands = {
-"     \ 'cpp': ['/home/csauer/builds/cquery/build/cquery', 
-"     \ '--log-file=/tmp/cq.log', 
-"     \ '--init={"cacheDirectory":"/tmp/cquery/"}']                                                                                                                                                                              
-"     \ }
+" Jump to stuff with coc.nvim
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 "-----------------------------------------
 " Vundle plugin
@@ -292,6 +318,7 @@ Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-projectionist'
 Plugin 'majutsushi/tagbar'
 " Plugin 'SirVer/ultisnips' -- not slow
 Plugin 'lervag/vimtex'
@@ -320,7 +347,8 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'godlygeek/tabular'
 " Plugin 'autozimu/LanguageClient-neovim'
-Plugin 'dense-analysis/ale'
+" Plugin 'dense-analysis/ale'
+Plugin 'neoclide/coc.nvim'
 Plugin 'wincent/vcs-jump'
 
 " All of your Plugins must be added before the following line

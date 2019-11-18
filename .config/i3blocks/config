@@ -110,7 +110,7 @@ command=/usr/share/i3blocks/$BLOCK_NAME
 
 # Custom module to track current project in watson
 [test]
-command=/home/csauer/.local/bin/watson status | sed -e 's/(.*)$//'
+command=/home/csauer/bin/watson_wrapper status | sed -e 's/(.*)$//'
 interval=5
 # color=#7aabfa
 

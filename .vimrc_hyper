@@ -3,6 +3,9 @@
 " indentation length in hyper is 3
 set softtabstop=3
 set shiftwidth=3
+" except in python where it's 4
+autocmd FileType python setlocal shiftwidth=4
+autocmd FileType python setlocal softtabstop=4
 
 " don't wrap, since hyper has very long lines
 set nowrap
@@ -12,8 +15,6 @@ set nowrap
 if g:localvimrc_sourced_once
   finish
 endif
-
-let g:alternateSearchPath = 'reg:|dbcore|dbcore/include/dbcore|,reg:|dbcore/include/dbcore|dbcore|'
 
 " Do not trigger YCM unless explicitly invoked
 let g:ycm_auto_trigger = 0
@@ -37,7 +38,7 @@ func! MyFuncNinjaCompile()
    :Make
 endfunc
 command! -nargs=0 NinjaCompile :call MyFuncNinjaCompile()
-nnoremap <leader>xc :NinjaCompile<cr>
+nnoremap <leader>xc :update<cr> :NinjaCompile<cr>
 
 func! MyFuncRunHyperTests()
    exe 'FocusDispatch cd ' . g:cmake_target_dir . ' && ctest --verbose'
@@ -45,3 +46,12 @@ func! MyFuncRunHyperTests()
 endfunc
 command! -nargs=0 RunHyperTests :call MyFuncRunHyperTests()
 nnoremap <leader>xt :RunHyperTests<cr>
+
+" alternate between hpp and cpp using projectionist
+" TODO right now, I consider the stweards json as identifier for the hyper dir
+let g:projectionist_heuristics = {
+      \ "hyper/&stewards.json": {
+      \   "hyper/*.cpp": {"alternate": "hyper/include/hyper/{}.hpp"},
+      \   "hyper/include/hyper/*.hpp": {"alternate": "hyper/{}.cpp"}
+      \ }}
+nnoremap <Leader>xa :A<CR>

@@ -19,3 +19,6 @@ alias fd="fdfind"
 
 # watson time tracker (my own wrapper)
 alias w="watson_wrapper"
+
+# quiet mode in gdb (removes copyright msg)
+alias gdb="gdb -q"
