@@ -26,7 +26,7 @@ copyq &
 # setxkbmap -layout "de,de,us" -variant "nodeadkeys,legacy,"
 # exec xmonad
 
-setxkbmap -layout de -model pc105 -variant deadtilde
+# setxkbmap -layout de -model pc105 -variant deadtilde
 
 # Use caps lock as escape
 setxkbmap -option caps:escape

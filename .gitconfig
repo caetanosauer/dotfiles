@@ -9,6 +9,12 @@
 [alias]
 	st = status
         co = checkout
+        wt = worktree
+        cp = cherry-pick
+        b  = branch
+        ap = add -p
+        rb = rebase -X patience -i
+	amd = commit --amend
         # lg = log --oneline --graph --decorate --branches
         # lgall = log --oneline --graph --decorate --all
         lg = log --format='%C(yellow)%h%Creset %C(cyan)%<(8,trunc)%aE%Creset%Cgreen%ad%Creset%C(auto)%d %s' --decorate --graph --branches --date=format:'%F %r'
@@ -17,9 +23,6 @@
 	wd = diff --color-words='[A-z_][A-z0-9_]*'
 	ctags = !.git/hooks/ctags
 	shead = show HEAD
-	amd = commit --amend
-        ap = add -p
-        rb = rebase -X patience -i
         rbcont = rebase --continue
         showstat = show --stat --format='%s%n%H%nAuthor: %an%nCommiter: %cn'
 	email-guess = !. ~/dotfiles/bin/git_guess_email.sh

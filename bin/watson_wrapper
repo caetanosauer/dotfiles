@@ -79,7 +79,26 @@ if [ $# -eq 1 ] && [ "$1" == "status" ]; then
     exit 0
 fi
 
+# Print daily log and report for my weekly notes
+if [ $# -ge 1 ] && [ "$1" == "daily" ]; then
+    # Extract date argument
+    DAY=$(date +%Y-%m-%d)
+    if [ $# -ge 2 ]; then
+        # This allows to pass strings like "yesterday" or "last Friday"
+        DAY=$(date --date="$2" +%Y-%m-%d)
+    fi
+    date -d "$DAY" > /dev/null || die "Invalid date: $DAY"
 
-# If arguments are given, just run watson
+    # Print daily report in my own markdown format
+    echo "## Log"
+    $WATSON log --no-pager -f "$DAY" -t "$DAY" --no-current | cut -f1 -d' ' --complement | sed -e 's/^ /### /'
+    echo "## Report"
+    # TODO sort by duration
+    watson report --no-pager -f "$DAY" -t "$DAY" --no-current | grep " - " | awk 'BEGIN{FS=" - "} {gsub(" ", "", $2); print "###", $1, "-", substr($2,0,length($2)-3)}'
+    exit 0
+fi
+
+
+# If nothing matched, just run watson
 $WATSON $*
 exit $?

@@ -55,9 +55,6 @@ set nolist
 " 2. search-replace with contents of register h and place cursor on replace part
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
-" make help window open a vertical split
-cnoremap help vert help
-
 " open (close) automatically as entering (leaving) them
 "set foldopen=all
 "set foldclose=all
@@ -350,6 +347,8 @@ Plugin 'godlygeek/tabular'
 " Plugin 'dense-analysis/ale'
 Plugin 'neoclide/coc.nvim'
 Plugin 'wincent/vcs-jump'
+Plugin 'psliwka/vim-smoothie'
+Plugin 'simnalamburt/vim-mundo'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
