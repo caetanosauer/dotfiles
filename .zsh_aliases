@@ -22,3 +22,6 @@ alias w="watson_wrapper"
 
 # quiet mode in gdb (removes copyright msg)
 alias gdb="gdb -q"
+
+# tree command preserving colors with less as pager
+alias treel="tree -C | less -R"

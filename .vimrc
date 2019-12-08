@@ -49,6 +49,14 @@ set formatoptions+=l
 set lbr
 set nolist
 
+" Create new vsplits below instead of above and vsplits to the right instead of
+" to the left
+set splitbelow
+set splitright
+
+" Delay in ms to show peekaboo window
+let g:peekaboo_delay = 500
+
 " replace selected text in visual mode
 " https://stackoverflow.com/questions/676600/vim-search-and-replace-selected-text
 " 1. copy selection into register h

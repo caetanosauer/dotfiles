@@ -53,6 +53,7 @@ bindsym $mod+p exec "~/bin/watson_wrapper"
 # TODO: testing fuzzyselector
 bindsym $mod+t exec "xterm -name floating -e python3 ~/dev/fuzzyselector/select.py"
 for_window [class="XTerm" instance="floating"] floating enable border pixel 3
+for_window [class="Yad"] floating enable border pixel 0
 
 # change focus (vim keys)
 bindsym $mod+h focus left
