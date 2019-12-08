@@ -15,7 +15,12 @@ alias wcopy="xclip -o | doitclient wclip"
 alias wpaste="doitclient wclip -r | xclip -i"
 
 # fd, a `find` alternative
-alias fd="fdfind"
+# Linux uses "fdfind" by default, mac just "fd"; my fzf calls "fdfind"
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     alias fd="fdfind";;
+    Darwin*)    alias fdfind="fd";;
+esac
 
 # watson time tracker (my own wrapper)
 alias w="watson_wrapper"

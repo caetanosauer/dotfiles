@@ -100,5 +100,5 @@ fi
 
 
 # If nothing matched, just run watson
-$WATSON $*
+$WATSON "$@"
 exit $?
