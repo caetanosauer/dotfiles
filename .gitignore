@@ -8,3 +8,4 @@
 .ssh/known_hosts
 .config/nvim/.netrwhist
 .spacemacs.d/.spacemacs.env
+.config/nvim/spell/en.utf-8.add.spl
