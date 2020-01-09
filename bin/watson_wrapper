@@ -42,14 +42,44 @@ if [ -z "$CHOOSE" ]; then
 fi
 CHOOSE="$CHOOSE $CHOOSE_APP_ARGS"
 
+
+
 # When invoked without arguments, the behavior depends on current state:
 # 1) If a project is currently being tracked, stop it.
 # 2) Otherwise, open rofi to choose from a previous project or type in a new one.
 if [ $# -eq 0 ]; then
     WSTATUS=$($WATSON status -p)
     if [ "$WSTATUS" != "No project started." ]; then
+        PROJECT=$($WATSON status -p)
         STOP_OUTPUT=$($WATSON stop)
         [ $? -eq 0 ] || die "Failed to stop project: $STOP_OUTPUT"
+        # Ask for a description for the CSV file
+        if xset q &>/dev/null; then
+            # TODO also ask for description without X
+            # ignore certain projects
+            case $PROJECT in
+                moonraker|planning|review) RESPONSE="";;
+                *)
+                    DESC_FILE=$HOME/notes/watson/descriptions.csv
+                    RESPONSE=$(zenity --entry --title "Description" --text "Describe what you just did for $PROJECT")
+                    RETCODE=$?
+                    if [ $RETCODE -ne 0 ]; then
+                        die "could not get description"
+                    fi
+                    ;;
+            esac
+            # output to file and check
+            if [ -n "$RESPONSE" ]; then
+                LAST_ID=$($WATSON frames | tail -n 1)
+                LINE=$LAST_ID","$RESPONSE
+                echo $LINE >> $DESC_FILE
+                # check that line was added
+                LAST_LINE=$(tail -n 1 $DESC_FILE)
+                if [ "$LAST_LINE" != "$LINE" ]; then
+                    die "ERROR: capture failed! line not found"
+                fi
+            fi
+        fi
         notify "$STOP_OUTPUT"
     else
         # TODO cannot add tags
