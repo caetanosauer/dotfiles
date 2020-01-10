@@ -1,0 +1,4 @@
+#!/bin/bash
+date +"L,%Y-%m-%d %H:%M:%S" >> $HOME/notes/locklog.csv
+i3lock -n -c 000000
+date +"U,%Y-%m-%d %H:%M:%S" >> $HOME/notes/locklog.csv
