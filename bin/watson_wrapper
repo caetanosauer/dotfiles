@@ -71,7 +71,7 @@ if [ $# -eq 0 ]; then
             # output to file and check
             if [ -n "$RESPONSE" ]; then
                 LAST_ID=$($WATSON frames | tail -n 1)
-                LINE=$LAST_ID","$RESPONSE
+                LINE=$LAST_ID',"'$RESPONSE'"'
                 echo $LINE >> $DESC_FILE
                 # check that line was added
                 LAST_LINE=$(tail -n 1 $DESC_FILE)
