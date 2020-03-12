@@ -33,19 +33,38 @@ func! MyFuncCMakeToggle()
 endfunc
 command! -nargs=0 CMakeToggle :call MyFuncCMakeToggle()
 
+" TODO display cmake target dir and ninja focused target on status bar
+" NinjaTargetSwitch -- changes the target used by NinjaCompile for more focused work
+let g:ninja_targets = [ "all", "hyperd", "sqltest", "sql_hyper" ]
+if (!exists("g:current_ninja_target_index"))
+   let g:current_ninja_target_index = 0
+endif
+" TODO there should be a const list of targets and this function just flips
+" rotates through the index on that list
+func! MyFuncNinjaTargetSwitch()
+   let g:current_ninja_target_index = g:current_ninja_target_index + 1
+   if (g:current_ninja_target_index >= len(g:ninja_targets))
+       g:current_ninja_target_index = 0
+   endif
+   echo "Ninja target is now: " . g:ninja_targets[g:current_ninja_target_index]
+endfunc
+command! -nargs=0 NinjaTargetSwitch :call MyFuncNinjaTargetSwitch()
+nnoremap <leader>xt :NinjaTargetSwitch<cr>
+
+" :NinjaCompile == sets the makeprg to ninja and calls it on a given target or globally
 func! MyFuncNinjaCompile()
    exe 'set makeprg=ninja\ -C\ ' . g:cmake_target_dir
-   :Make
+   execute 'Make ' . g:ninja_targets[g:current_ninja_target_index]
 endfunc
 command! -nargs=0 NinjaCompile :call MyFuncNinjaCompile()
 nnoremap <leader>xc :update<cr> :NinjaCompile<cr>
 
-func! MyFuncRunHyperTests()
-   exe 'FocusDispatch cd ' . g:cmake_target_dir . ' && ctest --verbose'
-   :Dispatch!
-endfunc
-command! -nargs=0 RunHyperTests :call MyFuncRunHyperTests()
-nnoremap <leader>xt :RunHyperTests<cr>
+" func! MyFuncRunHyperTests()
+"    exe 'FocusDispatch cd ' . g:cmake_target_dir . ' && ctest --verbose'
+"    :Dispatch!
+" endfunc
+" command! -nargs=0 RunHyperTests :call MyFuncRunHyperTests()
+" nnoremap <leader>xt :RunHyperTests<cr>
 
 " alternate between hpp and cpp using projectionist
 " TODO right now, I consider the stweards json as identifier for the hyper dir
