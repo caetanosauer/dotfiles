@@ -58,7 +58,11 @@ export DISABLE_FZF_KEY_BINDINGS="false"
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # Make fzf use fd instead of find: it is faster and also respects .gitignore
 # Note that fd is an alias to fdfind
-export FZF_DEFAULT_COMMAND='fdfind --type f'
+if [ "$(uname)" = "Darwin" ]; then
+    export FZF_DEFAULT_COMMAND='fd --type f'
+else
+    export FZF_DEFAULT_COMMAND='fdfind --type f'
+fi
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
