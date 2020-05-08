@@ -3,11 +3,12 @@
 # A wrapper script for watson, the time tracking tool
 
 function notify() {
-    if [ -n "$DISPLAY" ]; then
-        notify-send "$*"
-    else
-        echo "$*" 1>&2 ;
-    fi
+    # if [ -n "$DISPLAY" ]; then
+    #     notify-send "$*"
+    # else
+    #     echo "$*" 1>&2 ;
+    # fi
+    echo "$*" 1>&2 ;
 }
 
 function die() {
@@ -30,11 +31,11 @@ fi
 # TODO allow to type a new value not in the choice list?
 CHOOSE_APP_NAME=rofi
 CHOOSE_APP_ARGS="-dmenu"
-if ! xset q &>/dev/null; then
+# if ! xset q &>/dev/null; then
     # No X server running: use fzf in termnal
     CHOOSE_APP_NAME=fzf
     CHOOSE_APP_ARGS=
-fi
+# fi
 # Verify that it is installed and available in the PATH
 CHOOSE=$(which $CHOOSE_APP_NAME)
 if [ -z "$CHOOSE" ]; then
@@ -58,7 +59,7 @@ if [ $# -eq 0 ]; then
             # TODO also ask for description without X
             # ignore certain projects
             case $PROJECT in
-                moonraker|planning|review) RESPONSE="";;
+                moonraker|planning|review|defect-duty) RESPONSE="";;
                 *)
                     DESC_FILE=$HOME/notes/watson/descriptions.csv
                     RESPONSE=$(zenity --entry --title "Description" --text "Describe what you just did for $PROJECT")

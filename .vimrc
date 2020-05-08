@@ -43,7 +43,19 @@ set smarttab
 " statusline replaces ruler above
 set noruler
 set laststatus=2
-set statusline=%f%m%r%h%w\ [%Y]\ %{fugitive#statusline()}%=%l,%v\ (%p%%\ of\ %L)
+set statusline=%f " path to file
+set statusline+=%m " modified flag ([+] or [-])
+set statusline+=%r " read-only flag ([RO])
+set statusline+=%h " hel-buffer flag ([help])
+set statusline+=%w " preview-window-flag ([Preview])
+set statusline+=\ %y " file type ([vim])
+set statusline+=\ %{fugitive#statusline()} " fugitive status ([Git(master)])
+set statusline+=%= " alignment separator
+" TODO: write my own plugin for this
+set statusline+=[%{g:cmake_target_dir},%{GetCurrentCMakeTarget()}]
+set statusline+=%= " alignment separator
+set statusline+=%l,%v " current line and column
+set statusline+=\ (%p%%\ of\ %L) " percentage of current line and total line count
 
 set formatoptions+=l
 set lbr
@@ -357,6 +369,7 @@ Plugin 'neoclide/coc.nvim'
 Plugin 'wincent/vcs-jump'
 Plugin 'psliwka/vim-smoothie'
 Plugin 'simnalamburt/vim-mundo'
+Plugin 'masukomi/vim-markdown-folding'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

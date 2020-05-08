@@ -35,18 +35,22 @@ command! -nargs=0 CMakeToggle :call MyFuncCMakeToggle()
 
 " TODO display cmake target dir and ninja focused target on status bar
 " NinjaTargetSwitch -- changes the target used by NinjaCompile for more focused work
-let g:ninja_targets = [ "all", "hyperd", "sqltest", "sql_hyper" ]
+let g:ninja_targets = [ "all", "hyperd", "sqltest", "sql_hyper" , "learn", "tester_hyper"]
 if (!exists("g:current_ninja_target_index"))
    let g:current_ninja_target_index = 0
 endif
+func! GetCurrentCMakeTarget()
+    return g:ninja_targets[g:current_ninja_target_index]
+endfunc
 " TODO there should be a const list of targets and this function just flips
 " rotates through the index on that list
 func! MyFuncNinjaTargetSwitch()
-   let g:current_ninja_target_index = g:current_ninja_target_index + 1
-   if (g:current_ninja_target_index >= len(g:ninja_targets))
-       g:current_ninja_target_index = 0
+   if (g:current_ninja_target_index < (len(g:ninja_targets) - 1))
+       let g:current_ninja_target_index = g:current_ninja_target_index + 1
+   else
+       let g:current_ninja_target_index = 0
    endif
-   echo "Ninja target is now: " . g:ninja_targets[g:current_ninja_target_index]
+   echo "Ninja target is now: " . GetCurrentCMakeTarget()
 endfunc
 command! -nargs=0 NinjaTargetSwitch :call MyFuncNinjaTargetSwitch()
 nnoremap <leader>xt :NinjaTargetSwitch<cr>
