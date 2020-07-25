@@ -165,7 +165,7 @@ vnoremap <Leader>aj :'<,'>!jq .<CR>
 " see this example to run a selection through a calculator
 " @" refers to the contents of the " register (see :help quotequote)
 " TODO wrap this in function PythonEvaluate
-vnoremap <Leader>ac c<C-R>=system('python -c "print(' . @" . ', end=\"\")"')<CR><Esc>
+vnoremap <Leader>ac c<C-R>=system('python -c "print(' . @" . ')"')<CR><Esc>
 
 " Disable concealing of quotes in vim-json plugin
 let g:vim_json_syntax_conceal = 0

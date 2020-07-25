@@ -54,16 +54,25 @@ if [ $# -eq 0 ]; then
         PROJECT=$($WATSON status -p)
         STOP_OUTPUT=$($WATSON stop)
         [ $? -eq 0 ] || die "Failed to stop project: $STOP_OUTPUT"
-        # Ask for a description for the CSV file
-        if xset q &>/dev/null; then
+        # Ask for a description for the CSV file (also in console)
+        # if xset q &>/dev/null; then
+        if true; then
             # TODO also ask for description without X
             # ignore certain projects
             case $PROJECT in
-                moonraker|planning|review|defect-duty) RESPONSE="";;
+                moonraker|defect-duty) RESPONSE="";;
                 *)
                     DESC_FILE=$HOME/notes/watson/descriptions.csv
-                    RESPONSE=$(zenity --entry --title "Description" --text "Describe what you just did for $PROJECT")
-                    RETCODE=$?
+                    RETCODE=0
+                    MSG="Describe what you just did for $PROJECT: "
+                    # if xset q &>/dev/null; then
+                    if false; then
+                        RESPONSE=$(zenity --entry --title "Description" --text )
+                        RETCODE=$?
+                    else
+                        read -p "$MSG" RESPONSE
+                        RETCODE=$?
+                    fi
                     if [ $RETCODE -ne 0 ]; then
                         die "could not get description"
                     fi
