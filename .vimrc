@@ -370,6 +370,7 @@ Plugin 'wincent/vcs-jump'
 Plugin 'psliwka/vim-smoothie'
 Plugin 'simnalamburt/vim-mundo'
 Plugin 'masukomi/vim-markdown-folding'
+Plugin 'rhysd/vim-llvm'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

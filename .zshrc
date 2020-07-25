@@ -113,3 +113,8 @@ fi
 
 # load z tool
 source ~/dotfiles/bin/z/z.sh
+
+# pyenv setup
+export PATH="/home/csauer/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
