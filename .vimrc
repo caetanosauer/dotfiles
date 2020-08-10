@@ -52,7 +52,9 @@ set statusline+=\ %y " file type ([vim])
 set statusline+=\ %{fugitive#statusline()} " fugitive status ([Git(master)])
 set statusline+=%= " alignment separator
 " TODO: write my own plugin for this
-set statusline+=[%{g:cmake_target_dir},%{GetCurrentCMakeTarget()}]
+if (exists("g:cmake_target_dir"))
+    set statusline+=[%{g:cmake_target_dir},%{GetCurrentCMakeTarget()}]
+endif
 set statusline+=%= " alignment separator
 set statusline+=%l,%v " current line and column
 set statusline+=\ (%p%%\ of\ %L) " percentage of current line and total line count
