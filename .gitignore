@@ -1,5 +1,5 @@
 .vim/.netrwhist
-.vim/bundle
+.vim/plugged
 .config/ranger/bookmarks
 .config/ranger/history
 .config/ranger/tagged

@@ -313,76 +313,68 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-"-----------------------------------------
-" Vundle plugin
-" ----------------------------------------
-set nocompatible                   " required!
-filetype off                   " required!
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle required!
-Plugin 'VundleVim/Vundle.vim'
+" -------------------------------------------------
+"  vim-plug begin
+" -------------------------------------------------
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
 " My Bundles here:
-Plugin 'Valloric/ListToggle'
-Plugin 'sgeb/vim-diff-fold'
-Plugin 'chrisbra/vim-diff-enhanced'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-vinegar'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-speeddating'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-projectionist'
-Plugin 'majutsushi/tagbar'
-" Plugin 'SirVer/ultisnips' -- not slow
-Plugin 'lervag/vimtex'
-Plugin 'embear/vim-localvimrc'
-" Plugin 'lyuts/vim-rtags'
-Plugin 'mhinz/vim-grepper'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
-Plugin 'junegunn/vim-peekaboo'
-Plugin 'junegunn/gv.vim'
-Plugin 'junegunn/goyo.vim'
-Plugin 'junegunn/limelight.vim'
-" Plugin 'scrooloose/nerdtree'
-Plugin 'elzr/vim-json'
-" Plugin 'chrisbra/NrrwRgn'
-Plugin 'airblade/vim-gitgutter'
+Plug 'Valloric/ListToggle'
+Plug 'sgeb/vim-diff-fold'
+Plug 'chrisbra/vim-diff-enhanced'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-projectionist'
+Plug 'majutsushi/tagbar'
+" Plug 'SirVer/ultisnips' -- not slow
+Plug 'lervag/vimtex'
+Plug 'embear/vim-localvimrc'
+" Plug 'lyuts/vim-rtags'
+Plug 'mhinz/vim-grepper'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-peekaboo'
+Plug 'junegunn/gv.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+" Plug 'scrooloose/nerdtree'
+Plug 'elzr/vim-json'
+" Plug 'chrisbra/NrrwRgn'
+Plug 'airblade/vim-gitgutter'
 " Hyper-specific syntax highlighting
-Plugin 'git@gitlab.tableausoftware.com:avogelsgesang/vim-hyper-test-syntax'
-Plugin 'caetanosauer/vim-syntax-extra'
-Plugin 'caetanosauer/nord-vim'
-" Plugin 'rafi/awesome-vim-colorschemes'
-Plugin 'tommcdo/vim-exchange'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-" Plugin 'liuchengxu/vim-which-key'
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'
-Plugin 'godlygeek/tabular'
-" Plugin 'autozimu/LanguageClient-neovim'
-" Plugin 'dense-analysis/ale'
-Plugin 'neoclide/coc.nvim'
-Plugin 'wincent/vcs-jump'
-Plugin 'psliwka/vim-smoothie'
-Plugin 'simnalamburt/vim-mundo'
-Plugin 'masukomi/vim-markdown-folding'
-Plugin 'rhysd/vim-llvm'
+Plug 'git@gitlab.tableausoftware.com:avogelsgesang/vim-hyper-test-syntax'
+Plug 'caetanosauer/vim-syntax-extra'
+Plug 'caetanosauer/nord-vim'
+" Plug 'rafi/awesome-vim-colorschemes'
+Plug 'tommcdo/vim-exchange'
+Plug 'octol/vim-cpp-enhanced-highlight'
+" Plug 'liuchengxu/vim-which-key'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'godlygeek/tabular'
+" Plug 'autozimu/LanguageClient-neovim'
+" Plug 'dense-analysis/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'wincent/vcs-jump'
+Plug 'psliwka/vim-smoothie'
+Plug 'simnalamburt/vim-mundo'
+Plug 'masukomi/vim-markdown-folding'
+Plug 'rhysd/vim-llvm'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-
-" ------------------------------------------
-"  Vundle plugin end
-"  -----------------------------------------
+" Initialize plugin system
+call plug#end()
+" -------------------------------------------------
+"  vim-plug end
+" -------------------------------------------------
 
  " Color scheme
 set termguicolors
