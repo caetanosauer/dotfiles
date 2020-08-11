@@ -52,7 +52,7 @@ COMPLETION_WAITING_DOTS="true"
 ZSH_CUSTOM=~/dotfiles/.zsh_custom
 
 # set up fzf before loading plugin below
-export FZF_BASE=~/.vim/bundle/fzf
+export FZF_BASE=~/.vim/plugged/fzf
 export DISABLE_FZF_KEY_BINDINGS="false"
 # Apparently this is not needed anymore?
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
