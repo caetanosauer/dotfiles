@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # A wrapper script for watson, the time tracking tool
 
@@ -19,7 +19,9 @@ function die() {
 WATSON=$(which watson)
 if [ -z "$WATSON" ]; then
     # Workaround for pip installation
-    WATSON_FALLBACK="$HOME/.local/bin/watson"
+    # WATSON_FALLBACK="$HOME/.local/bin/watson"
+    # Workaround for brew installation -- I guess?
+    WATSON_FALLBACK="/usr/local/bin/watson"
     if [ -x "$WATSON_FALLBACK" ]; then
         WATSON=$WATSON_FALLBACK;
     else
@@ -36,6 +38,11 @@ CHOOSE_APP_ARGS="-dmenu"
     CHOOSE_APP_NAME=fzf
     CHOOSE_APP_ARGS=
 # fi
+if [ "$(uname)" == "Darwin" ]; then
+    # Use `choose` tool on Mac
+    CHOOSE_APP_NAME=/usr/local/bin/choose
+    CHOOSE_APP_ARGS=
+fi
 # Verify that it is installed and available in the PATH
 CHOOSE=$(which $CHOOSE_APP_NAME)
 if [ -z "$CHOOSE" ]; then
@@ -48,7 +55,7 @@ CHOOSE="$CHOOSE $CHOOSE_APP_ARGS"
 # When invoked without arguments, the behavior depends on current state:
 # 1) If a project is currently being tracked, stop it.
 # 2) Otherwise, open rofi to choose from a previous project or type in a new one.
-if [ $# -eq 0 ]; then
+if [ $# -eq 0 ] || [ -z "$1" ]; then
     WSTATUS=$($WATSON status -p)
     if [ "$WSTATUS" != "No project started." ]; then
         PROJECT=$($WATSON status -p)
@@ -66,8 +73,11 @@ if [ $# -eq 0 ]; then
                     RETCODE=0
                     MSG="Describe what you just did for $PROJECT: "
                     # if xset q &>/dev/null; then
-                    if false; then
-                        RESPONSE=$(zenity --entry --title "Description" --text )
+                    if [ "$(uname)" == "Darwin" ]; then
+                        # Use Zenity to get message if running on X or MacOS
+                        # RESPONSE=$(zenity --entry --title "Description" --text )
+                        # This works on mac:
+                        RESPONSE=$(/usr/local/bin/zenity --entry --text="$MSG")
                         RETCODE=$?
                     else
                         read -p "$MSG" RESPONSE
