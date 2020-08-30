@@ -118,3 +118,6 @@ source ~/dotfiles/bin/z/z.sh
 export PATH="/home/csauer/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
+# git-fuzzy
+export PATH="$HOME/builds/git-fuzzy/bin:$PATH"
