@@ -55,7 +55,7 @@ ZSH_CUSTOM=~/dotfiles/.zsh_custom
 export FZF_BASE=~/.vim/plugged/fzf
 export DISABLE_FZF_KEY_BINDINGS="false"
 # Apparently this is not needed anymore?
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # Make fzf use fd instead of find: it is faster and also respects .gitignore
 # Note that fd is an alias to fdfind
 if [ "$(uname)" = "Darwin" ]; then
