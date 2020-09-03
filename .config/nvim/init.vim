@@ -24,18 +24,16 @@ autocmd FileType c,cpp autocmd BufWritePre <buffer> :TrailingWhitespaceRemove
 
 " Set space key as leader
 let mapleader = " "
-
 " TAB completion shows an advanced menu instead of cycling through options
 set wildmenu
-
 " insert spaces instead of \t when Tab is pressed
 set expandtab
-
 " fix backspace (don't know why it stopped working)
 set backspace=indent,eol,start
-
-"when typing <TAB> at bginning of line, use 'shiftwidth' rather than 'tabstop'
+" when typing <TAB> at bginning of line, use 'shiftwidth' rather than 'tabstop'
 set smarttab
+" highlight current line
+set cursorline
 
 " show line and column number on status bar
 "set ruler
@@ -335,10 +333,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-projectionist'
 Plug 'majutsushi/tagbar'
-" Plug 'SirVer/ultisnips' -- not slow
 Plug 'lervag/vimtex'
 Plug 'embear/vim-localvimrc'
-" Plug 'lyuts/vim-rtags'
 Plug 'mhinz/vim-grepper'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -347,28 +343,26 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/gv.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
-" Plug 'scrooloose/nerdtree'
 Plug 'elzr/vim-json'
-" Plug 'chrisbra/NrrwRgn'
 Plug 'airblade/vim-gitgutter'
 " Hyper-specific syntax highlighting
 Plug 'git@gitlab.tableausoftware.com:avogelsgesang/vim-hyper-test-syntax'
 Plug 'caetanosauer/vim-syntax-extra'
 Plug 'caetanosauer/nord-vim'
-" Plug 'rafi/awesome-vim-colorschemes'
 Plug 'tommcdo/vim-exchange'
 Plug 'octol/vim-cpp-enhanced-highlight'
 " Plug 'liuchengxu/vim-which-key'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'godlygeek/tabular'
-" Plug 'autozimu/LanguageClient-neovim'
-" Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'wincent/vcs-jump'
 Plug 'psliwka/vim-smoothie'
 Plug 'simnalamburt/vim-mundo'
 Plug 'masukomi/vim-markdown-folding'
 Plug 'rhysd/vim-llvm'
+" Checkout branches using fzf
+Plug 'stsewd/fzf-checkout.vim'
+Plug 'jreybert/vimagit'
 
 " Initialize plugin system
 call plug#end()
