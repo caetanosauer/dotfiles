@@ -32,3 +32,11 @@ alias gdb="gdb -q"
 alias treel="tree -C | less -R"
 
 alias g="git"
+
+# exa and ls
+if command -v exa &> /dev/null; then
+    alias ll='exa -lahF --git'
+    alias lt='exa --tree --level=2'
+else
+    alias ll='ls -lh'
+fi
