@@ -30,3 +30,5 @@ alias gdb="gdb -q"
 
 # tree command preserving colors with less as pager
 alias treel="tree -C | less -R"
+
+alias g="git"
