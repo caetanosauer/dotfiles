@@ -40,3 +40,6 @@ if command -v exa &> /dev/null; then
 else
     alias ll='ls -lh'
 fi
+
+# ccmake does not work with 256 colors for some reason
+alias ccmake='TERM="screen-16color" ccmake'
