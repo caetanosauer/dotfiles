@@ -79,9 +79,9 @@ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 "set foldopen=all
 "set foldclose=all
 " folds less than N lines are always shown open
-set foldminlines=3
+" set foldminlines=3
 " folds only until depth 2 (functions, classes, top-level comments -- possibly inside namespace)
-set foldnestmax=2
+" set foldnestmax=2
 " do not fold by default
 set nofoldenable
 
@@ -364,6 +364,8 @@ Plug 'rhysd/vim-llvm'
 " Checkout branches using fzf
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'jreybert/vimagit'
+" Fade unfocused windows
+Plug 'TaDaa/vimade'
 
 " Initialize plugin system
 call plug#end()
