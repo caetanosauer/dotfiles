@@ -1,7 +1,5 @@
 # Base dir for my own settings
 export ZSH_CONFIG=$HOME/.config/zsh
-# Set up fzf
-source $ZSH_CONFIG/fzf.zsh
 # Aliases
 source $ZSH_CONFIG/aliases.zsh
 # Environment vars
@@ -18,6 +16,9 @@ ttyctl -f
 
 # Vi mode
 bindkey -v
+
+# Set up fzf (needs to be done after bindkey for some reason)
+source $ZSH_CONFIG/fzf.zsh
 
 # Infinite history
 HISTFILE="$HOME/.zsh_history"

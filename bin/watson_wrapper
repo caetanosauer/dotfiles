@@ -38,11 +38,11 @@ CHOOSE_APP_ARGS="-dmenu"
     CHOOSE_APP_NAME=fzf
     CHOOSE_APP_ARGS=
 # fi
-if [ "$(uname)" == "Darwin" ]; then
+# if [ "$(uname)" == "Darwin" ]; then
     # Use `choose` tool on Mac
-    CHOOSE_APP_NAME=/usr/local/bin/choose
-    CHOOSE_APP_ARGS=
-fi
+    # CHOOSE_APP_NAME=/usr/local/bin/choose
+    # CHOOSE_APP_ARGS=
+# fi
 # Verify that it is installed and available in the PATH
 CHOOSE=$(which $CHOOSE_APP_NAME)
 if [ -z "$CHOOSE" ]; then
@@ -73,7 +73,8 @@ if [ $# -eq 0 ] || [ -z "$1" ]; then
                     RETCODE=0
                     MSG="Describe what you just did for $PROJECT: "
                     # if xset q &>/dev/null; then
-                    if [ "$(uname)" == "Darwin" ]; then
+                    # if [ "$(uname)" == "Darwin" ]; then
+                    if false; then
                         # Use Zenity to get message if running on X or MacOS
                         # RESPONSE=$(zenity --entry --title "Description" --text )
                         # This works on mac:

@@ -165,6 +165,7 @@ vnoremap <Leader>aj :'<,'>!jq .<CR>
 " see this example to run a selection through a calculator
 " @" refers to the contents of the " register (see :help quotequote)
 " TODO wrap this in function PythonEvaluate
+" TODO this produces an extra newline
 vnoremap <Leader>ac c<C-R>=system('python -c "print(' . @" . ')"')<CR><Esc>
 
 " Disable concealing of quotes in vim-json plugin
@@ -305,6 +306,11 @@ autocmd! User GoyoLeave Limelight!
 " consider only git-controlled files in fzf Tags search (fdfind respects .gitignore by default)
 let g:fzf_tags_command = 'fdfind --type f --exclude="docs/" | ctags -R --links=no -L -'
 
+" Floaterm floating terminal
+nnoremap <Leader>t :FloatermToggle<CR>
+" Exit terminal more quickly
+tnoremap <silent>   <C-z>   <C-\><C-n>:FloatermToggle<CR>
+
 " Jump to stuff with coc.nvim
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -366,6 +372,8 @@ Plug 'stsewd/fzf-checkout.vim'
 Plug 'jreybert/vimagit'
 " Fade unfocused windows
 Plug 'TaDaa/vimade'
+" Floating-window terminal
+Plug 'voldikss/vim-floaterm'
 
 " Initialize plugin system
 call plug#end()
