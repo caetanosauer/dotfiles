@@ -25,6 +25,9 @@ esac
 # watson time tracker (my own wrapper)
 alias w="watson_wrapper"
 
+# buku bookmark manager
+alias b="buku --suggest"
+
 # quiet mode in gdb (removes copyright msg)
 alias gdb="gdb -q"
 

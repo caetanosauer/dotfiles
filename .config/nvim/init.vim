@@ -272,14 +272,6 @@ let g:vimtex_imaps_leader = '"'
 let g:matchparen_timeout = 2
 let g:matchparen_insert_timeout = 2
 
-" TODO: I tried putting these in the after-directory, but it doesn't work for
-" some reason
-" whitelist of local vimrc files to load without asking
-let g:localvimrc_whitelist = ['/home/tsi/csauer/dotfiles/.vimrc_hyper', '/Users/csauer/dotfiles/.vimrc_hyper']
-" I can't make it stop asking if file should be loaded without a sandbox, so disable it
-" TODO can I make this a command to run with projectionist?
-let g:localvimrc_sandbox = 0
-
 " interpret .log files as jsonl for hyper (TODO make it check if json is well
 " formatted and then give up if not)
 autocmd BufNewFile,BufRead *.log setlocal filetype=json
@@ -340,7 +332,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-projectionist'
 Plug 'majutsushi/tagbar'
 Plug 'lervag/vimtex'
-Plug 'embear/vim-localvimrc'
 Plug 'mhinz/vim-grepper'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -385,3 +376,8 @@ call plug#end()
 set termguicolors
 " set background=dark
 colorscheme nord
+
+" load project-specific configurations from `.nvimrc`
+" to set it up for hyper, add symlink ~/dev/hyper-db/.nvimrc -> ~/dotfiles/.vimrc_hyper
+set exrc
+set secure

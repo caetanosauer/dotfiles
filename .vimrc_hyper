@@ -10,12 +10,6 @@ autocmd FileType python setlocal softtabstop=4
 " don't wrap, since hyper has very long lines
 set nowrap
 
-" only execute commands below once for each vim instance, instead of once for each opened buffer
-" see doc for g:localvimrc_event
-if g:localvimrc_sourced_once
-  finish
-endif
-
 " Do not trigger YCM unless explicitly invoked
 let g:ycm_auto_trigger = 0
 
