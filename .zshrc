@@ -10,15 +10,27 @@ source $ZSH_CONFIG/omz_themes.zsh
 source $ZSH_CONFIG/omz_git.zsh
 source $ZSH_CONFIG/robbyrussell.zsh-theme
 
+# Antigen plugin manager (TODO replace manual sources above?)
+# antigen.zsh comes from `curl -L git.io/antigen > antigen.zsh`
+source $ZSH_CONFIG/antigen.zsh
+antigen bundle softmoth/zsh-vim-mode
+antigen bundle zsh-users/zsh-syntax-highlighting
+# Load the theme. (TODO replace source above)
+# antigen theme robbyrussell
+# Tell Antigen that you're done.
+antigen apply
+
 # Fix weird terminal bug 
 # https://www.reddit.com/r/zsh/comments/2rfcba/sometimes_the_enter_key_prints_m_instead_of_doing/
 ttyctl -f
 
-# Vi mode
-bindkey -v
-
 # Set up fzf (needs to be done after bindkey for some reason)
 source $ZSH_CONFIG/fzf.zsh
+
+# `v` to edit command line in vim
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
 
 # Infinite history
 HISTFILE="$HOME/.zsh_history"
