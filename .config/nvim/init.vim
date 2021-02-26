@@ -127,7 +127,9 @@ autocmd FileType sql setlocal commentstring=--\ %s
 
 " mappings to close window and delete buffer without closing its window
 nnoremap <Leader>c :close<CR>
-nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
+" nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
+" delete line without messing up registers
+nnoremap <Leader>d "_dd
 
 " smart-case searching
 set ignorecase
