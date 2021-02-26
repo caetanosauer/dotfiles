@@ -303,11 +303,16 @@ nnoremap <Leader>t :FloatermToggle<CR>
 " Exit terminal more quickly
 tnoremap <silent>   <C-z>   <C-\><C-n>:FloatermToggle<CR>
 
-" Jump to stuff with coc.nvim
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+" jump to stuff with lsp client
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 
 " -------------------------------------------------
 "  vim-plug begin
@@ -352,7 +357,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 " Plug 'liuchengxu/vim-which-key'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'godlygeek/tabular'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'wincent/vcs-jump'
 Plug 'psliwka/vim-smoothie'
 Plug 'simnalamburt/vim-mundo'
@@ -365,6 +370,7 @@ Plug 'jreybert/vimagit'
 Plug 'TaDaa/vimade'
 " Floating-window terminal
 Plug 'voldikss/vim-floaterm'
+Plug 'neovim/nvim-lspconfig'
 
 " Initialize plugin system
 call plug#end()
@@ -376,6 +382,11 @@ call plug#end()
 set termguicolors
 " set background=dark
 colorscheme nord
+
+" setup clangd with lspconfig
+lua << EOF 
+require'lspconfig'.clangd.setup{}
+EOF 
 
 " load project-specific configurations from `.nvimrc`
 " to set it up for hyper, add symlink ~/dev/hyper-db/.nvimrc -> ~/dotfiles/.vimrc_hyper

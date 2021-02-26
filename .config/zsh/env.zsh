@@ -33,3 +33,11 @@ export KEYTIMEOUT=1
 
 # csauer: settings for doitclient
 export DOIT_HOST=csauer
+
+# skip venv generation in Hyper
+export HYPER_VENV_DISABLE=1
+
+# Use icecc with ccache in Hyper -- only Linux
+if [[ "$(uname)" == "Linux" ]]; then
+    export CCACHE_PREFIX="$HOME/bin/icecc-strip.sh"
+fi

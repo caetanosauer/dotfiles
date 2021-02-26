@@ -1,0 +1,60 @@
+#! /usr/bin/env bash
+# Strict mode, for bash help see https://devhints.io/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+#---------------------------------------------------------------------------
+# Setup
+function show_help(){
+   echo "Usage: $0  [-nc|--no-cmake] <worktree name> [source branch]"
+   exit 1
+}
+# Read optional arguments
+run_cmake=1
+while [[ "$#" -gt 0 &&  "$1" =~ ^- ]]; do case $1 in
+  -h | --help ) show_help ;;
+  # -s | --string ) shift; string=$1 ;;
+  -nc | --no-cmake ) run_cmake=0 ;;
+  *) echo "Unknown parameter passed: $1"; exit 1 ;;
+esac; shift; done
+# Read positional arguments
+if [[ ! "$#" -eq 1 ]] && [[ ! "$#" -eq 2 ]]; then
+   show_help
+fi
+worktree_name=$1;
+source_branch=${2:-""};
+#---------------------------------------------------------------------------
+
+#---------------------------------------------------------------------------
+# create the worktree if it does not exist yet
+if [[ ! -e "$1" ]]; then
+   # If a branch was explicitly given as argument, use it
+  if [[ -n $source_branch ]]; then
+    git worktree add -b "$worktree_name" --no-track "$worktree_name" "$source_branch"
+  # else, if the worktree name is the name of an existing branch, use that branch
+  elif git rev-parse --verify $worktree_name 2> /dev/null || git rev-parse --verify "origin/${worktree_name}" 2> /dev/null ; then
+    git worktree add "$worktree_name" "$worktree_name"
+  else
+    # otherwise,  use origin/master
+    git worktree add -b "$worktree_name" --no-track "$worktree_name" origin/master
+  fi
+fi
+#---------------------------------------------------------------------------
+pushd "$worktree_name"
+
+# run git status to trigger performance improvements in the repo
+git status > /dev/null
+
+# Initialize build directories
+if [[ $run_cmake -eq 1 ]]; then
+   # set up cmake folders
+   cmk debug
+   cmk release
+   # Copy hyper-specific neovim config
+   cp $HOME/dotfiles/.vimrc_hyper .nvimrc
+   # Make sure compile commands are available for clangd
+   ln -s debug/compile_commands.json
+fi
+
+popd
+#---------------------------------------------------------------------------
