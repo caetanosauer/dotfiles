@@ -10,7 +10,10 @@ function show_help(){
    exit 1
 }
 
-# TODO, if cmake >= 3.91, set -DCMAKE_OPTIMIZE_DEPENDENCIES=1
+EXTRA_CMAKE_FLAGS=""
+if [[ "$(cmake --version)" =~ "cmake version 3.19" ]]; then
+    EXTRA_CMAKE_FLAGS="-DCMAKE_OPTIMIZE_DEPENDENCIES=1"
+fi
 
 # Read optional arguments
 while [[ "$#" -gt 0 &&  "$1" =~ ^- ]]; do case $1 in
@@ -35,9 +38,11 @@ case $type in
          -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
          -DCMAKE_DOCUMENTATION_LEVEL=Internal \
          -DUSING_CCACHE:BOOL=ON \
+         -DUSING_CCACHE_SHARE_DIRS:BOOL=ON \
          -DHYPER_RESET_CCACHE_FOLDER_SIZE:BOOL=OFF \
          -DHYPER_SEPARATE_DEBUG_SYMBOLS:BOOL=OFF \
-         -DHYPER_SKIP_FCFS:BOOL=ON \
+         -DHYPER_SKIP_FCFS:BOOL=OFF \
+          $EXTRA_CMAKE_FLAGS \
          ..
      popd
      ln -s debug/compile_commands.json
@@ -54,8 +59,10 @@ case $type in
           -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON \
           -DCMAKE_DOCUMENTATION_LEVEL=Internal \
           -DUSING_CCACHE:BOOL=ON \
+          -DUSING_CCACHE_SHARE_DIRS:BOOL=ON \
           -DHYPER_RESET_CCACHE_FOLDER_SIZE:BOOL=OFF \
           -DHYPER_SKIP_FCFS:BOOL=OFF \
+          $EXTRA_CMAKE_FLAGS \
           ..
       popd
       # prefer the debug version of compile commands

@@ -77,12 +77,12 @@ fi
 # load z tool
 # source ~/dotfiles/bin/z/z.sh
 
-# pyenv setup (only on Linux)
-if [ "$(uname)" = "Linux" ]; then
-    export PATH="/home/csauer/.pyenv/bin:$PATH"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-fi
+# # pyenv setup (only on Linux)
+# if [ "$(uname)" = "Linux" ]; then
+#     export PATH="/home/csauer/.pyenv/bin:$PATH"
+#     eval "$(pyenv init -)"
+#     eval "$(pyenv virtualenv-init -)"
+# fi
 
 # git-fuzzy
 export PATH="$HOME/builds/git-fuzzy/bin:$PATH"
